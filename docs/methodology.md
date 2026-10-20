@@ -41,7 +41,7 @@ The manuscript loop is `for step in range(2, Iterations + 1)` after an initial s
 
 ## Benchmarks
 
-`src/metaopt/benchmarks.py` is the Appendix B listing, with three documented edits: Quartic and Xin-She Yang draw uniforms from `seed_benchmark_noise` instead of the global legacy stream; Elliptic raises `ValueError` for `D < 2` because the exponent divides by `D - 1`; the domain helper rejects a nonpositive dimension. Stochastic noise defaults to `default_rng(0)`.
+`src/metaopt/benchmarks.py` is the Appendix B listing, with these documented edits: Quartic and Xin-She Yang draw uniforms from `seed_benchmark_noise` instead of the global legacy stream; Elliptic raises `ValueError` for `D < 2` because the exponent divides by `D - 1`; Paviani warns, without changing the expression, when a coordinate is outside `(2, 10)`; `outside_domain` reports the registered box; the domain helper rejects a nonpositive dimension. Stochastic noise defaults to `default_rng(0)`.
 
 ## What was not run
 

@@ -101,3 +101,86 @@ Blockers:
 5. Confirm Python 3.12 on Linux by running the workflow.
 
 Exact fixes for the book are in `docs/errata.md`.
+
+## Review run on 2026-10-19
+
+Phase: Validation. This section is new evidence from the branch `review/reproducibility-2026-10-19`. The tables above are the previous local report and are not restated as if they were rerun.
+
+Time range: 2026-10-20 05:28–05:41 UTC (2026-10-19 22:28–22:41 America/Los_Angeles). Data source: this checkout. The editorial DOCX was not in the checkout, so its hyperlinks were not opened. Execution: local computation on one Mac. Not paper trading and not live execution. Not a GitHub-hosted Linux run.
+
+### Previous metrics beside this run
+
+| Metric | Previous report | This review | Delta |
+| --- | --- | --- | --- |
+| `pytest -q` | 37 passed, 1 warning, 11.68 s, Python 3.11.7 only | 60 passed, 15.79 s on Python 3.11.7; 60 passed, 43.83 s on Python 3.12.13 | +23 tests; the Paviani log warning is now an explicit `RuntimeWarning` asserted by a test |
+| Notebooks 01–10 | Passed; elapsed time not recorded | Exit code 0 in 20 s (3.11.7) and 23 s (3.12.13). Outputs were not written back | timing added |
+| `ruff check` and `ruff format --check` | Passed | Passed on both interpreters with ruff 0.17.1. On 3.12 each command was under 1 s | same result |
+| Appendix C / Appendix E | Not run | Still not run. Reduced study below is a different experiment | full tables remain unverified |
+| Python 3.12 | Not executed | Executed locally on macOS. Linux Actions not yet observed | local only |
+| License and author order | Unapproved license; Komarchuk listed last | Unchanged | none |
+
+### Commands and results
+
+Python 3.11.7, NumPy 2.4.6, SciPy 1.17.1, Matplotlib 3.11.2, SymPy 1.14.0, pandas 3.0.6, ruff 0.17.1, platform `macOS-26.6.2-x86_64-i386-64bit`, 16 CPUs.
+
+```bash
+.venv/bin/ruff check .
+.venv/bin/ruff format --check .
+.venv/bin/pytest -q
+MPLBACKEND=Agg MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/reproduce_tables.py
+MPLBACKEND=Agg MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/reproduce_figures.py
+.venv/bin/python scripts/reduced_statistical_comparison.py
+MPLBACKEND=Agg MPLCONFIGDIR=.cache/matplotlib IPYTHONDIR=.cache/ipython JUPYTER_CONFIG_DIR=.cache/jupyter .venv/bin/python scripts/execute_notebooks.py
+.venv/bin/python scripts/validate_doc_links.py
+```
+
+| Check | Result |
+| --- | --- |
+| `ruff check .` and `ruff format --check .` | Passed |
+| `pytest -q` | 60 passed, 15.79 s |
+| `scripts/reproduce_tables.py` | Exit 0, about 1 s. Wrote `results/reference_minima.csv` |
+| `scripts/reproduce_figures.py` | Exit 0, about 2 s. Files under `figures/generated/` stay unverified |
+| `scripts/reduced_statistical_comparison.py` | Exit 0, 0.1084 s inside the script. See `results/reduced_comparison_py3.11.7.json` |
+| `scripts/execute_notebooks.py` | Exit 0, 20 s, notebooks 01–10 |
+| `scripts/validate_doc_links.py` | 0 missing relative markdown links. DOCX not passed, so book hyperlinks were not checked |
+
+Python 3.12.13, NumPy 2.5.4, SciPy 1.18.1, Matplotlib 3.11.2, SymPy 1.14.0, pandas 3.0.6, ruff 0.17.1, same platform string.
+
+```bash
+.cache/venv312/bin/ruff check .
+.cache/venv312/bin/ruff format --check .
+.cache/venv312/bin/pytest -q
+.cache/venv312/bin/python scripts/reproduce_tables.py
+.cache/venv312/bin/python scripts/reproduce_figures.py
+.cache/venv312/bin/python scripts/reduced_statistical_comparison.py
+.cache/venv312/bin/python scripts/execute_notebooks.py
+```
+
+| Check | Result |
+| --- | --- |
+| `ruff check .` | Passed, under 1 s |
+| `ruff format --check .` | 63 files already formatted, under 1 s |
+| `pytest -q` | 60 passed, 43.83 s |
+| Reproduction scripts together | Exit 0, about 3 s. Reduced script 0.0895 s. File: `results/reduced_comparison_py3.12.13.json` |
+| Notebooks 01–10 | Exit 0, 23 s |
+
+The 30 objective values and `nfev` counts in the two reduced JSON files were equal. That is agreement between these two local NumPy builds on this protocol. It is not agreement with Appendix C.
+
+`results/reduced_comparison_summary.json` is whichever interpreter ran the script last. In this session that was Python 3.12.13. Use the versioned JSON files when quoting a number.
+
+Grouped medians (identical in both files): Spherical PSO 1.6932, DE/rand 5.58251, GWO 1.7852; Rastrigin PSO 28.2014, DE/rand 38.2869, GWO 23.0007. Every run used `nfev` 64. These are not printed handbook cells.
+
+Dependency snapshots: `requirements/lock-py311.txt` and `requirements/lock-py312.txt`. They record this Mac. They are not the install used by `.github/workflows/ci.yml`.
+
+### Verdict for this review
+
+No-go for a tagged release and no-go for a KDP-ready claim. Rationale and owners are in `docs/release-readiness.md`. Stakeholders who have to decide the open items: Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk.
+
+Blockers that this run did not close:
+
+1. License still unnamed. Author order in the repository was not changed.
+2. Appendix C and Appendix E were not recomputed. The reduced study is labeled `matches_appendix_c: false` and `matches_appendix_e: false`.
+3. Whitley and the Problem 1a objective remain editor decisions. Text is in `docs/manuscript-replacements.md`.
+4. Linux GitHub Actions for Python 3.11 and 3.12 has not been observed yet. Local macOS success is not that observation.
+5. The editorial DOCX was not in the checkout, so clickable book links were not validated here. Repository markdown relative links had no missing targets.
+6. No page-by-page visual check of a print PDF was done.

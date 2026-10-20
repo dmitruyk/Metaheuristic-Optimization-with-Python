@@ -128,10 +128,9 @@ def test_stochastic_benchmarks_repeat_when_reseeded():
     assert first != third
 
 
-def test_paviani_rejects_the_log_domain_by_returning_nonfinite_or_raising():
+def test_paviani_warns_and_is_nonfinite_outside_the_open_interval():
     # The formula uses log(x-2) and log(10-x). x=0 is outside (2, 10).
-    try:
+    with pytest.warns(RuntimeWarning, match="open interval"):
         value = PavianiFunction(np.zeros(2))
-    except (ValueError, FloatingPointError):
-        return
     assert not np.isfinite(value)
+    assert np.isfinite(PavianiFunction(np.full(2, 5.0)))
