@@ -18,7 +18,7 @@ Time range of the checks in this section: 2026-10-20 05:55–05:56 UTC for GitHu
 | Appendix C / Appendix E | not run | still not run; cost estimate is `results/full_experiment_cost_estimate.json` | labeled historical |
 | Worked scalars | matched in tests | 11 matched, 3 unmatched in `results/published_comparison.json` | Appendix C, Appendix E, and the settling-time value stay unmatched |
 
-`main` at `0fc55d5` passed GitHub Actions. This branch at `e6940ba` also passed, in run 39379558457. The workflow then wrote `results/ci/summary.json` as commit `d37e243`. A `GITHUB_TOKEN` push does not start another run, so `d37e243` is the log of `e6940ba`, not a separate test. Run `39377406220` (pull request, commit `d0b5c29609`) is recorded as a failure, and the jobs API returned zero jobs. Logs for that run returned HTTP 403 without authentication, so the failure has no job log in this session. It is not evidence that pytest failed. The next commit on `main` passed.
+`main` at `0fc55d5` passed GitHub Actions. This branch passed twice: run 39379558457 on `e6940ba`, then run 39379892358 on `87d7c01`. Each success is followed by a workflow commit under `results/ci/`. A `GITHUB_TOKEN` push does not start another run, so that commit is a log, not a separate test. Run `39377406220` (pull request, commit `d0b5c29609`) is recorded as a failure, and the jobs API returned zero jobs. Logs for that run returned HTTP 403 without authentication, so the failure has no job log in this session. It is not evidence that pytest failed. The next commit on `main` passed.
 
 Local commands for the library changes on this branch:
 
