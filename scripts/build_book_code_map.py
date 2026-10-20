@@ -119,7 +119,7 @@ def main() -> None:
         "# Book code map",
         "",
         "Source file: `Metaheuristic_Optimization_with_Python_Editorial_Edition.docx`.",
-        "Authors: Yuriy Romasevych and Viatcheslav Loveikin.",
+        "Authors: Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk.",
         "",
         "Rendered-page estimates come from Word page-break markers. Word's document",
         "property says 346 pages; the counter used here ends at 347. The implementation",
