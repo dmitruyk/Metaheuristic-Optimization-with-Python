@@ -106,7 +106,7 @@ Exact fixes for the book are in `docs/errata.md`.
 
 Phase: Validation. This section is new evidence from the branch `review/reproducibility-2026-10-19`. The tables above are the previous local report and are not restated as if they were rerun.
 
-Time range: 2026-10-20 05:28–05:41 UTC (2026-10-19 22:28–22:41 America/Los_Angeles). Data source: this checkout. The editorial DOCX was not in the checkout, so its hyperlinks were not opened. Execution: local computation on one Mac. Not paper trading and not live execution. Not a GitHub-hosted Linux run.
+Time range: 2026-10-20 05:28–05:43 UTC (2026-10-19 22:28–22:43 America/Los_Angeles). Data source: this checkout, plus `Metaheuristic_Optimization_with_Python_Editorial_Edition.docx` from `~/Downloads` (not stored in the repository). Execution: local computation on one Mac. Not paper trading and not live execution. Not a GitHub-hosted Linux run.
 
 ### Previous metrics beside this run
 
@@ -142,7 +142,7 @@ MPLBACKEND=Agg MPLCONFIGDIR=.cache/matplotlib IPYTHONDIR=.cache/ipython JUPYTER_
 | `scripts/reproduce_figures.py` | Exit 0, about 2 s. Files under `figures/generated/` stay unverified |
 | `scripts/reduced_statistical_comparison.py` | Exit 0, 0.1084 s inside the script. See `results/reduced_comparison_py3.11.7.json` |
 | `scripts/execute_notebooks.py` | Exit 0, 20 s, notebooks 01–10 |
-| `scripts/validate_doc_links.py` | 0 missing relative markdown links. DOCX not passed, so book hyperlinks were not checked |
+| `scripts/validate_doc_links.py` on the Downloads DOCX | 0 missing repository paths. The file has 8 external citation links and no `github.com` or `metaopt` text, so the seven chapter-title repository links are not in this DOCX |
 
 Python 3.12.13, NumPy 2.5.4, SciPy 1.18.1, Matplotlib 3.11.2, SymPy 1.14.0, pandas 3.0.6, ruff 0.17.1, same platform string.
 
@@ -182,5 +182,5 @@ Blockers that this run did not close:
 2. Appendix C and Appendix E were not recomputed. The reduced study is labeled `matches_appendix_c: false` and `matches_appendix_e: false`.
 3. Whitley and the Problem 1a objective remain editor decisions. Text is in `docs/manuscript-replacements.md`.
 4. Linux GitHub Actions for Python 3.11 and 3.12 has not been observed yet. Local macOS success is not that observation.
-5. The editorial DOCX was not in the checkout, so clickable book links were not validated here. Repository markdown relative links had no missing targets.
+5. The Downloads DOCX has eight external citation links and no repository links under the chapter titles. Repository markdown relative links had no missing targets. A later linked DOCX still needs the same check.
 6. No page-by-page visual check of a print PDF was done.

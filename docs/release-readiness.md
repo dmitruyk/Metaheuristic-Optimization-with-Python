@@ -17,7 +17,7 @@ KDP-ready is not claimed. A high-resolution PDF and a visual check of equations,
 | 5 | Appendix E timings reproduced or explicitly labeled historical | 🔴 open | full timing workbook not run |
 | 6 | Python 3.11 and 3.12 unit tests green on GitHub-hosted Linux | 🟡 waiting on this pull request's Actions run | local runs are in `docs/validation-report.md`; Linux is not local evidence |
 | 7 | Notebooks 01–10 execute from a clean checkout on Linux | 🟡 waiting on the notebook job | local execution is in the validation report |
-| 8 | Book links resolve | 🟡 repository markdown checked; DOCX hyperlinks need the manuscript file | `python scripts/validate_doc_links.py` |
+| 8 | Book links resolve | 🟡 Downloads DOCX has 8 citation links and no repository links; chapter-title links are absent from that file | `python scripts/validate_doc_links.py` on `~/Downloads/Metaheuristic_Optimization_with_Python_Editorial_Edition.docx` |
 | 9 | Every published figure and table marked verified or unverified | 🟢 recorded | `docs/book-code-map.md` and `docs/coverage-matrix.md`; figures stay unverified |
 | 10 | Dependency pins from the validation environments | 🟢 recorded as platform-specific locks, not as a cross-platform solver | `requirements/lock-py311.txt`, `requirements/lock-py312.txt` |
 | 11 | Tagged release, then replace `/blob/main/` links | 🔴 not started | do this only after items 1–7 are accepted |
