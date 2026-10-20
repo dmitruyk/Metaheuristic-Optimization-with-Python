@@ -23,7 +23,7 @@ A `verified` row was executed in this checkout and compared with a printed scala
 | 3 | GWOEPD extra evaluations | `src/metaopt/variants/gwoepd.py` | `test_gwoepd_counts_the_replaced_wolves` | 05 smoke | verified accounting (`10 + 3 * 15 = 55` in that test); figures unverified |
 | 3 | Figures 3.1–3.8 and Table 3.1 | none claimed | none | none | unverified |
 | 4 | 54 Appendix B formulas | `src/metaopt/benchmarks.py` | `tests/test_benchmarks.py` | `notebooks/04_benchmarks.ipynb` | verified where a simple reference location is tested; see `results/reference_minima.csv` |
-| 4 | Whitley | `WhitleyFunction` | `test_whitley_table_disagrees_with_the_listing` | 04 prose | unverified as a table match; code follows Appendix B; editor decision open |
+| 4 | Whitley | `WhitleyFunction` | `test_whitley_minimum_is_zero_at_the_all_ones_vector` | 04 prose | verified against Appendix B and Jamil and Yang (0 at all ones). Table 4.1 cells were swapped and are corrected in the local review copy |
 | 4 | Paviani outside `(2, 10)` | `PavianiFunction` | `test_paviani_warns_and_is_nonfinite_outside_the_open_interval` | 04 exercise | corrected-with-erratum (warning only; formula unchanged) |
 | 4 | Elliptic at `D = 1` | `EllipticFunction` | `test_elliptic_and_registered_domains_reject_bad_inputs` | 04 exercise | corrected-with-erratum (`ValueError`) |
 | 4 | Domain mask | `outside_domain`, `evaluate_benchmark` | `test_elliptic_and_registered_domains_reject_bad_inputs` | 04 | verified as a guard, not as Table 4.1 |
@@ -31,8 +31,9 @@ A `verified` row was executed in this checkout and compared with a printed scala
 | 4 | Tables 4.1 and 4.2 as printed images | `docs/errata.md` item 8 | partial reference checks | 04 | unverified as a full table; disagreements listed for the editor |
 | 5 | Equal-budget smoke | `src/metaopt/experiments.py` | edge-case budget tests | `notebooks/05_fair_comparisons.ipynb` | verified as a smoke budget only |
 | 5 | Tables 5.1 and 5.2, Figure 5.2 | not recomputed | none | none | unverified |
-| 6 | Problem 1a ITAE | `src/metaopt/applications/pid.py` `objective_1a` | `test_pid_worked_values` | `notebooks/06_pid_tuning.ipynb` | verified against the reduction-section numbers |
-| 6 | Problem 1a settling listing | `objective_1a_settling` | exercised by the notebook; not selected as the published objective | 06 | unverified as the Section 6.3 objective; both functions are kept |
+| 6 | Problem 1a ITAE | `objective_1a_itae` (`objective_1a` is the same function) | `test_pid_worked_values` | `notebooks/06_pid_tuning.ipynb` | verified against 19655252.199124742 and 18.796046141402556 |
+| 6 | Settling time on the Problem 1a plant | `objective_1a_settling_time` | `test_pid_worked_values` shows it does not match the ITAE numbers | 06 | verified as a different criterion; not the Section 6.3 objective |
+| 6 | Practical Exercise 1 | `objective_chapter6_exercise1_settling` | finite at `(1, 1, 1)` in `test_pid_worked_values` | 06 | verified as the exercise plant `1/(1+s)**3`; no printed optimum is claimed |
 | 6 | Problem 1b | `objective_1b` | `test_pid_worked_values` | 06 | verified |
 | 6 | Robot paths | `src/metaopt/applications/mobile_robot.py` | `test_robot_and_crane_worked_values` | `notebooks/07_robot_path_planning.ipynb` | verified |
 | 6 | Crane polynomial | `src/metaopt/applications/crane.py` | `test_robot_and_crane_worked_values` | `notebooks/08_crane_control.ipynb` | verified scalars; feasibility uses a `1e-6` penalty cutoff documented in the source |

@@ -1,4 +1,26 @@
 All checks passed!
-65 files already formatted
-.............................................................            [100%]
-61 passed in 10.35s
+72 files already formatted
+........................................................................ [ 54%]
+............................................................             [100%]
+132 passed in 10.05s
+markdown relative links missing: 0
+docx hyperlinks: not checked; pass the editorial DOCX path to check them
+Processing ./.
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: metaopt
+  Building wheel for metaopt (pyproject.toml): started
+  Building wheel for metaopt (pyproject.toml): finished with status 'done'
+  Created wheel for metaopt: filename=metaopt-0.1.0-py3-none-any.whl size=50260 sha256=dee489f90a40f588410e2647af826c8c57fed44c4b901f2928134fd2fb28ecac
+  Stored in directory: /tmp/pip-ephem-wheel-cache-5bj637fl/wheels/f1/54/25/85fb1e729c6d5bb4af93608ed629531603fc0c1cd9cda6d426
+Successfully built metaopt
+wrote /home/runner/work/_temp/ci-out/quick_validation.json
+Quick validation only. These numbers are not Appendix C or Appendix E.
+elapsed_seconds 0.0319
+Full Generator protocol nominal evaluations: 945000000. Rough wall-clock range on a 2026-10-19 laptop-class CPU: 8.8–65.6 hours. Appendix E would add another timing pass at 20 runs.
+wrote /home/runner/work/_temp/ci-out/full_experiment_cost_estimate.json
+Full protocol not started. Cost estimate only.

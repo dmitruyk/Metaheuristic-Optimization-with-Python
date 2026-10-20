@@ -1,5 +1,7 @@
 # Results
 
+`quick_validation_summary.json` is the Generator smoke profile. `full_experiment_cost_estimate.json` is a cost estimate and records `executed: false`. `published_comparison.json` matches worked scalars and leaves Appendix C and Appendix E unmatched. None of these files is a reproduction of Appendix C or Appendix E.
+
 This directory is for local experiment output.
 
 Do not treat a file here as a reproduction of Appendix C or Appendix E unless

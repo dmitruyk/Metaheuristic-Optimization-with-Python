@@ -37,13 +37,20 @@ def test_ten_variable_objective_on_the_printed_point():
 
 
 def test_pid_worked_values():
-    unstable = pid.objective_1a(*pid.WORKED_1A_UNSTABLE)
-    feasible = pid.objective_1a(*pid.WORKED_1A_FEASIBLE)
+    unstable = pid.objective_1a_itae(*pid.WORKED_1A_UNSTABLE)
+    feasible = pid.objective_1a_itae(*pid.WORKED_1A_FEASIBLE)
     dominant = pid.objective_1b(*pid.WORKED_1B)
+    assert pid.objective_1a(*pid.WORKED_1A_FEASIBLE) == feasible
     assert unstable == pytest.approx(pid.WORKED_1A_UNSTABLE_VALUE, rel=1e-6, abs=1e-4)
     assert feasible == pytest.approx(pid.WORKED_1A_FEASIBLE_VALUE, rel=1e-5, abs=1e-4)
     assert dominant == pytest.approx(pid.WORKED_1B_VALUE, rel=1e-6, abs=1e-8)
     assert feasible < 100
+    settling = pid.objective_1a_settling_time(*pid.WORKED_1A_FEASIBLE)
+    assert pid.objective_1a_settling(*pid.WORKED_1A_FEASIBLE) == settling
+    assert settling != pytest.approx(pid.WORKED_1A_FEASIBLE_VALUE, rel=1e-3)
+    exercise = pid.objective_chapter6_exercise1_settling(1.0, 1.0, 1.0)
+    assert np.isfinite(exercise)
+    assert exercise != pytest.approx(feasible)
 
 
 def test_robot_and_crane_worked_values():

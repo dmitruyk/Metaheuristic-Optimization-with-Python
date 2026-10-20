@@ -40,6 +40,14 @@ Benchmark reference checks use the locations in Table 4.1 where the location is 
 
 `scripts/reproduce_figures.py` writes plots under `figures/generated/` with `unverified` in the file name. They are not copies of Appendix A and they are not claimed to match any printed curve.
 
+## Two profiles (neither one is Appendix C or Appendix E)
+
+`python scripts/handbook_experiment.py --profile quick` writes `results/quick_validation_summary.json`. On 2026-10-20 that run took 0.032 s on Python 3.11.7, used PSO, DE/rand, and GWO, Spherical and Rastrigin, dimension 5, population 8, 64 evaluations, 2 runs, seeds 12345 and 12346, `Generator`. `matches_appendix_c` is false.
+
+`python scripts/handbook_experiment.py --profile full` writes `results/full_experiment_cost_estimate.json` and does not start the run. The nominal count is `14 * 54 * 100 * 25 * 500 = 945000000` objective evaluations. The hour range in that file is 8.75–65.625 hours on the 2026-10-19 timing assumptions (30000 and 4000 evaluations per second). Appendix E at 20 runs would be about one fifth of that, still hours. `scripts/compare_published_values.py` writes `results/published_comparison.json`. On this date it matched 11 worked scalars and left Appendix C, Appendix E, and the settling-time value unmatched. Tolerances are relative `1e-6` and absolute `1e-8`.
+
+The manuscript sizes, seeds, and the legacy-versus-Generator distinction are in `docs/experiment-protocol.md`.
+
 ## Reduced study (not Appendix C or Appendix E)
 
 `python scripts/reduced_statistical_comparison.py` writes `results/reduced_comparison_summary.json`, a copy named for the Python version, and the matching CSV files. The protocol is PSO, DE/rand, and GWO on Spherical and Rastrigin, dimension 5, population 8, 64 evaluations, 5 runs, seeds `12345` through `12349`, using `Generator`. The JSON field `matches_appendix_c` is false. The same field is false for Appendix E. Wall-clock seconds in that file are timings of this reduced protocol only. `requirements/lock-py311.txt` and `requirements/lock-py312.txt` are macOS x86_64 snapshots of the environments that produced the 2026-10-19 review. They are not the Linux CI install.

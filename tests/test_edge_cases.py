@@ -2,12 +2,18 @@
 
 from __future__ import annotations
 
+import warnings
+
 import numpy as np
 import pytest
 
 from metaopt.benchmarks import (
+    Alpine2Function,
     EllipticFunction,
     QuarticFunction,
+    Schwefel223Function,
+    benchmark_domain,
+    benchmark_names,
     evaluate_benchmark,
     outside_domain,
     seed_benchmark_noise,
@@ -159,6 +165,62 @@ def test_med_pso_restarts_without_indexing_an_empty_history():
     assert np.isfinite(result.fun)
     assert result.nfev <= 80
     assert len(result.history) >= 2
+
+
+@pytest.mark.parametrize("name", benchmark_names())
+def test_every_benchmark_is_finite_at_the_domain_midpoint(name):
+    seed_benchmark_noise(0)
+    index = benchmark_names().index(name)
+    domain = np.asarray(benchmark_domain(index, 2), dtype=float)
+    midpoint = (domain[:, 0] + domain[:, 1]) / 2.0
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)
+        value = evaluate_benchmark(name, midpoint)
+    assert np.isfinite(value)
+
+
+def test_invalid_dimension_and_empty_point_are_rejected():
+    with pytest.raises(ValueError, match="dimension"):
+        benchmark_domain(0, 0)
+    with pytest.raises(ValueError, match="at least one"):
+        outside_domain("Spherical", [])
+
+
+def test_nonfinite_objective_values_do_not_become_the_reported_best():
+    def objective(x):
+        value = float(np.asarray(x, dtype=float)[0])
+        if value < 0.0:
+            return float("nan")
+        return (value - 0.2) ** 2
+
+    result = pso_minimize(objective, [[-1.0, 1.0]], seed=3, population_size=12, iterations=8)
+    assert np.isfinite(result.fun)
+    assert result.x[0] >= 0.0
+
+
+def test_budget_smaller_than_the_population_is_rejected():
+    with pytest.raises(ValueError, match="initial population"):
+        pso_minimize(sphere, [[-1.0, 1.0]], seed=1, population_size=8, max_evaluations=4)
+
+
+def test_de_and_gwo_reject_populations_that_cannot_form_the_update():
+    with pytest.raises(ValueError):
+        de_minimize(sphere, [[-1.0, 1.0]], seed=1, population_size=3, iterations=2)
+    with pytest.raises(ValueError):
+        gwo_minimize(sphere, [[-1.0, 1.0]], seed=1, population_size=2, iterations=2)
+
+
+def test_alpine2_stays_nonfinite_for_a_negative_coordinate():
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", RuntimeWarning)
+        value = Alpine2Function(np.array([-1.0, 2.0]))
+    assert not np.isfinite(value)
+
+
+def test_schwefel_223_overflow_does_not_raise():
+    with np.errstate(over="ignore"):
+        value = Schwefel223Function(np.array([1e40, -1e40]))
+    assert np.isinf(value)
 
 
 def test_summarize_groups_uses_the_sample_standard_deviation():

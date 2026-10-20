@@ -8,23 +8,21 @@ Rendered pages are estimates from page-break markers in `Metaheuristic_Optimizat
 
 ### Whitley, Table 4.1 versus Appendix B
 
-- **Where.** Table 4.1 and Appendix B, Whitley row.
-- **Before.** Table 4.1 location `0`, value `1`.
-- **After, option A.** Location: the all-ones vector. Value: `0`. Code stays as Appendix B / Jamil and Yang.
-- **After, option B.** Keep location `0` and value `1`, and replace the Appendix B formula so the origin evaluates to 1. That code change is not in this repository.
-- **Reason.** In this environment `WhitleyFunction(np.ones(2))` is 0 and `WhitleyFunction(np.zeros(2))` is not 1.
-- **Result change.** Option A changes the table. Option B changes the code and any later experiment that calls Whitley. Applying only one of them leaves the book and the code in conflict.
-- **Decision.** Not made. Owner: handbook authors. The code was not changed.
+- **Where.** Table 4.1 and Appendix B, Whitley row. Columns are location, then value.
+- **Before.** Location `0`, value `1`.
+- **After.** Location `1` (every coordinate is 1, the same notation the table uses for Rosenbrock). Value `0`.
+- **Reason.** Appendix B cites Jamil and Yang. `WhitleyFunction(np.ones(D))` is 0. At the origin every pair term has `y = 1`, so the value is `D^2 * (1/4000 - cos(1) + 1)`, equal to about 1.83979 for `D = 2`, not 1. The printed cells are that pair swapped. The formula was not changed to match the printed cells.
+- **Result change.** The code is unchanged. `scripts/prepare_reviewed_manuscript.py` applies the cell edit to a local review copy that is not committed, because the manuscript is all rights reserved.
+- **Decision.** Scientific correction applied to the review copy on 2026-10-20. KDP use of that copy still needs author acceptance and visual QA. Owner for publication acceptance: handbook authors.
 
 ### Problem 1a objective
 
-- **Where.** Reduction of Problem 1a (rendered page 187) and the solving-section listing (rendered page 203). Section 6.3 needs one sentence naming the minimized criterion.
-- **Before (solving section).** `return float(penalty_terminal + 1e6 * overshoot + settling)` with overshoot `max(0.0, np.max(y) - r)` and a 2% settling time.
-- **Before (reduction listing), which matches 19655252.199124742 and 18.796046141402556.** `return float(terminal_penalty + overshoot_penalty + itae)` with `overshoot_penalty = 1e6 * max(0.0, (np.max(y) - r) / r)` and `itae = np.trapezoid(...)`.
-- **After.** Keep both listings in the book only if the prose says they are different. Otherwise delete or relabel the one that was not minimized, and say so in Section 6.3.
-- **Reason.** Both listings parse. They are not the same criterion.
-- **Result change.** The repository still exposes `objective_1a` and `objective_1a_settling`. No experiment in Chapter 6 was relabeled.
-- **Decision.** Not made. Owner: handbook authors.
+- **Where.** Section 6.3 reduction of Problem 1a, and Practical Exercise 1.
+- **Before.** An earlier note treated the settling-time listing as a second Problem 1a objective in the solving section. That note is withdrawn. The exercise uses plant `1/(1+s)**3`.
+- **After.** Problem 1a remains the ITAE objective. The library names are `objective_1a_itae`, `objective_1a_settling_time` (same plant, different criterion), and `objective_chapter6_exercise1_settling` (exercise plant).
+- **Reason.** The printed values 19655252.199124742 and 18.796046141402556 match ITAE and do not match the settling-time value at the same gains. Section 6.3 names ITAE.
+- **Result change.** No printed Chapter 6 optimizer table was relabeled. Appendix-style search results for Problem 1a were not recomputed.
+- **Decision.** Identification made from the manuscript text and the worked scalars. No objective was deleted.
 
 ### Author order and license
 

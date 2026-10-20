@@ -1,0 +1,34 @@
+{
+  "protocol": "full-generator-protocol",
+  "matches_appendix_c": false,
+  "matches_appendix_e": false,
+  "algorithms": 14,
+  "benchmarks": 54,
+  "runs_total": 75600,
+  "evaluations_per_run_nominal": 12500,
+  "objective_evaluations_nominal": 945000000,
+  "seconds_if_30000_evaluations_per_second": 31500.0,
+  "seconds_if_4000_evaluations_per_second": 236250.0,
+  "hour_range": [
+    8.75,
+    65.625
+  ],
+  "timing_runs_if_same_rate": {
+    "appendix_e_runs": 15120,
+    "hour_range": [
+      1.75,
+      13.125
+    ]
+  },
+  "statement": "Nominal count is 14 * 54 * 100 * 25 * 500 = 945000000 objective evaluations before GWOEPD's extra half-pack evaluations. Do not describe a smaller run as Appendix C or Appendix E. This invocation did not run the protocol.",
+  "environment": {
+    "python": "3.12.15",
+    "numpy": "2.5.4",
+    "metaopt": "0.1.0",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpu_count": 4
+  },
+  "executed": false
+}
