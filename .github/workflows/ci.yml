@@ -1,6 +1,3 @@
-# Stored outside .github/workflows so a GitHub token without the workflow
-# scope can push this repository. Copy this file to .github/workflows/ci.yml
-# to turn on GitHub Actions.
 name: ci
 
 on:
