@@ -22,3 +22,9 @@ not replay that file even if the study is rerun.
 other interpreter's summary. Those files are a five-run Generator study on
 two functions and three algorithms. They are not Appendix C or Appendix E.
 `reference_minima.csv` is a direct evaluation at stated locations, not a search.
+
+`ci/` is written by `.github/workflows/ci.yml`. On a push to a branch other
+than `main`, the `publish-results` job copies the Linux pytest and notebook
+logs into that directory and commits them on the same branch. `summary.json`
+is that commit. `run-39376535919.json` records the earlier green run, which
+did not save pytest stdout. None of these files is Appendix C or Appendix E.
