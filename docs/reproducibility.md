@@ -39,3 +39,9 @@ Benchmark reference checks use the locations in Table 4.1 where the location is 
 ## Figures
 
 `scripts/reproduce_figures.py` writes plots under `figures/generated/` with `unverified` in the file name. They are not copies of Appendix A and they are not claimed to match any printed curve.
+
+## Reduced study (not Appendix C or Appendix E)
+
+`python scripts/reduced_statistical_comparison.py` writes `results/reduced_comparison_summary.json`, a copy named for the Python version, and the matching CSV files. The protocol is PSO, DE/rand, and GWO on Spherical and Rastrigin, dimension 5, population 8, 64 evaluations, 5 runs, seeds `12345` through `12349`, using `Generator`. The JSON field `matches_appendix_c` is false. The same field is false for Appendix E. Wall-clock seconds in that file are timings of this reduced protocol only. `requirements/lock-py311.txt` and `requirements/lock-py312.txt` are macOS x86_64 snapshots of the environments that produced the 2026-10-19 review. They are not the Linux CI install.
+
+Paviani outside `(2, 10)` warns and returns a non-finite value. `outside_domain` and `evaluate_benchmark` check the registered box. Neither function changes an Appendix B formula. Quartic noise is uniform on `[0, 1)` and advances a generator that is separate from the optimizer, so two calls differ until `seed_benchmark_noise` is called again.

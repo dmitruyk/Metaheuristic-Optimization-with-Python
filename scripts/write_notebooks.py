@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,9 +53,13 @@ def main() -> None:
             cell(
                 """# Chapter 1 — Particle swarm optimization
 
-Canonical PSO from the handbook. The ten-variable worked objective is
-`sum of squares + sum of absolute values`. The printed value at the stated point is 12.3901.
-Search traces use an explicit NumPy Generator and will not match a run that called `np.random.seed`.
+**Goal.** Evaluate the Section 1.3 worked objective and run canonical PSO with an explicit seed and an explicit generation count.
+
+The objective is `sum of squares + sum of absolute values`. At the printed point the value is 12.3901. The search uses `numpy.random.Generator`. It will not match a run that called `np.random.seed`.
+
+**Expected.** The first printed number is 12.3901 within `1e-9`. `nfev` is `12 * 8 = 96`. `fun` is finite and nonnegative. That search value is not Figure 1.8.
+
+**Interpretation.** A repeated seed repeats `history` in this NumPy build. A different seed may change `fun` and must not change `nfev` while the population and iteration count stay fixed.
 """,
                 "markdown",
             ),
@@ -77,6 +83,25 @@ result = minimize(
     iterations=8,
 )
 print(result.fun, result.nfev, result.message)
+if abs(objective(point) - 12.3901) > 1e-9:
+    raise SystemExit("the Section 1.3 value drifted")
+if result.nfev != 96 or not np.isfinite(result.fun):
+    raise SystemExit("PSO budget or objective was not the expected smoke result")
+""",
+            ),
+            cell(
+                """## Exercise
+
+Call the same minimizer with `seed=2`. Confirm `nfev` is still 96. The objective value may change. Do not install packages from the notebook.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+other = minimize(objective, [[-20.0, 20.0]] * 10, seed=2, population_size=12, iterations=8)
+print(other.fun, other.nfev)
+if other.nfev != result.nfev:
+    raise SystemExit("the evaluation budget changed with the seed")
 """,
             ),
         ],
@@ -87,7 +112,13 @@ print(result.fun, result.nfev, result.message)
             cell(
                 """# Chapter 2 — Differential evolution
 
-`DE/rand/1/bin` and `DE/best/1/bin` use `CR=0.5` and `F=0.6`. The donor is clipped to the box before crossover.
+**Goal.** Compare `DE/rand/1/bin` and `DE/best/1/bin` on the sphere under one evaluation budget.
+
+Both use `CR=0.5` and `F=0.6`. The donor is clipped to the box before crossover.
+
+**Expected.** Each run prints a finite objective. `max_evaluations=120` is the shared budget. These values are not Figure 2.5.
+
+**Interpretation.** The same seed makes each variant repeatable. The two variants do not have to return the same value. Compare them by `nfev`, not by a claim about the printed chapter figure.
 """,
                 "markdown",
             ),
@@ -101,8 +132,30 @@ def sphere(x):
 
 bounds = [[-5.0, 5.0]] * 4
 common = dict(seed=2, population_size=12, max_evaluations=120)
-print("rand", minimize(sphere, bounds, **common).fun)
-print("best", minimize_best(sphere, bounds, **common).fun)
+rand = minimize(sphere, bounds, **common)
+best = minimize_best(sphere, bounds, **common)
+print("rand", rand.fun, rand.nfev)
+print("best", best.fun, best.nfev)
+if rand.nfev > 120 or best.nfev > 120:
+    raise SystemExit("a DE run exceeded the shared budget")
+if not np.isfinite(rand.fun) or not np.isfinite(best.fun):
+    raise SystemExit("a DE run returned a non-finite objective")
+""",
+            ),
+            cell(
+                """## Exercise
+
+Set `seed=3` in `common` and run the cell again. Both calls must still respect `max_evaluations=120`.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+common_seed_3 = dict(common, seed=3)
+again = minimize(sphere, bounds, **common_seed_3)
+print(again.fun, again.nfev)
+if again.nfev > 120:
+    raise SystemExit("the exercise run exceeded the budget")
 """,
             ),
         ],
@@ -113,7 +166,13 @@ print("best", minimize_best(sphere, bounds, **common).fun)
             cell(
                 """# Chapter 3 — Grey wolf optimizer
 
+**Goal.** Run canonical GWO on the sphere and check the evaluation count.
+
 `a = 2 - 2 * (step / iterations)` with `step` starting at 2, because the initial pack is generation 1. Positions are clipped to the box.
+
+**Expected.** `nfev` is `12 * 10 = 120`. `history[-1]` equals `fun`. The curve is not Figure 3.5.
+
+**Interpretation.** mGWO changes the schedule of `a`. GWOEPD spends extra evaluations on the replaced wolves, so its `nfev` is not this number. See `tests/test_gwo.py`.
 """,
                 "markdown",
             ),
@@ -127,6 +186,25 @@ def sphere(x):
 
 result = minimize(sphere, [[-5.0, 5.0]] * 3, seed=3, population_size=12, iterations=10)
 print(result.fun, result.nfev, result.history[-1])
+if result.nfev != 120 or result.history[-1] != result.fun:
+    raise SystemExit("GWO accounting did not match the smoke budget")
+""",
+            ),
+            cell(
+                """## Exercise
+
+Run `metaopt.variants.mgwo.minimize` with the same seed, population, and iteration count. Its `nfev` should also be 120. The objective value may differ because `a` follows a square schedule.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+from metaopt.variants.mgwo import minimize as mgwo_minimize
+
+modified = mgwo_minimize(sphere, [[-5.0, 5.0]] * 3, seed=3, population_size=12, iterations=10)
+print(modified.fun, modified.nfev)
+if modified.nfev != result.nfev:
+    raise SystemExit("mGWO did not use the same evaluation count")
 """,
             ),
         ],
@@ -137,7 +215,13 @@ print(result.fun, result.nfev, result.history[-1])
             cell(
                 """# Chapter 4 — Benchmarks
 
-Appendix B defines 54 functions. This notebook checks the printed reference locations that do not depend on a figure. Elliptic is undefined for one variable because the listing divides by `D - 1`.
+**Goal.** Check that Appendix B exposes 54 functions and that two reference locations still return the printed values.
+
+Elliptic is undefined for one variable because the listing divides by `D - 1`. Paviani is defined on `(2, 10)`; a point outside that interval warns and is non-finite. Table 4.1 and Appendix B disagree on Whitley. This notebook does not choose a replacement formula.
+
+**Expected.** `len(BENCHMARKS)` is 54. The sphere at the origin is 0. Rosenbrock at the all-ones vector is 0.
+
+**Interpretation.** `results/reference_minima.csv` is a location check, not a Chapter 5 rank table.
 """,
                 "markdown",
             ),
@@ -150,6 +234,30 @@ print(len(BENCHMARKS))
 print(SphericalFunction(np.zeros(4)))
 print(RosenbrockFunction(np.ones(5)))
 print(benchmark_domain(0, 3))
+if len(BENCHMARKS) != 54 or SphericalFunction(np.zeros(4)) != 0.0 or RosenbrockFunction(np.ones(5)) != 0.0:
+    raise SystemExit("a reference benchmark value changed")
+""",
+            ),
+            cell(
+                """## Exercise
+
+Evaluate Paviani at the origin and Elliptic in one variable. The first call warns. The second raises `ValueError`. Neither call is a reason to edit the Appendix B formula.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+import warnings
+from metaopt.benchmarks import EllipticFunction, PavianiFunction
+
+with warnings.catch_warnings(record=True) as caught:
+    warnings.simplefilter("always")
+    paviani = PavianiFunction(np.zeros(2))
+print(paviani, len(caught))
+try:
+    EllipticFunction(np.zeros(1))
+except ValueError as exc:
+    print(type(exc).__name__)
 """,
             ),
         ],
@@ -160,7 +268,13 @@ print(benchmark_domain(0, 3))
             cell(
                 """# Chapter 5 — Equal evaluation budgets
 
-The handbook's 500-iteration protocol does not give GWOEPD the same number of objective calls as PSO. This notebook gives every listed algorithm the same `max_evaluations`. The sphere values are smoke results, not Appendix C.
+**Goal.** Give every handbook algorithm the same `max_evaluations` on the sphere.
+
+The handbook's 500-iteration protocol does not give GWOEPD the same number of objective calls as PSO. Population 9 is a square, so von Neumann PSO can run. These sphere values are smoke results. They are not Appendix C. The reduced study in `results/reduced_comparison_summary.json` is also a new experiment, not the printed rank tables.
+
+**Expected.** Each row prints a finite `fun` and an `nfev` no larger than 90.
+
+**Interpretation.** Equal budgets are the fair comparison in this library. Matching the manuscript's iteration count is a different experiment, and that experiment was not rerun.
 """,
                 "markdown",
             ),
@@ -175,6 +289,22 @@ def sphere(x):
 rows = compare(sphere, [[-5.0, 5.0]] * 2, seed=4, population_size=9, max_evaluations=90)
 for row in rows:
     print(f"{row['algorithm']:12} fun={row['fun']:.4e} nfev={row['nfev']}")
+    if row["nfev"] > 90 or not np.isfinite(row["fun"]):
+        raise SystemExit(f"{row['algorithm']} broke the smoke budget")
+""",
+            ),
+            cell(
+                """## Exercise
+
+Read one row's `nfev`. It has to be at most 90. Do not treat the printed `fun` as a cell from Table 5.1 or Appendix C.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+print(rows[0]["algorithm"], rows[0]["nfev"], rows[0]["max_evaluations"])
+if rows[0]["nfev"] > rows[0]["max_evaluations"]:
+    raise SystemExit("the first algorithm exceeded the shared budget")
 """,
             ),
         ],
@@ -185,7 +315,13 @@ for row in rows:
             cell(
                 """# Chapter 6 — PID worked values
 
-Problem 1a at `(0.1, 1, 9)` and `(0.276, 0.765, 2.221)`, and Problem 1b at `(0.1, 2, 6)`. Tolerances used by the tests are in `tests/test_examples_smoke.py`.
+**Goal.** Evaluate the printed Problem 1a and Problem 1b points.
+
+`objective_1a` is the ITAE reduction. The printed numbers 19655252.199124742 and 18.796046141402556 belong to that reduction. `objective_1a_settling` is the other listing in the solving section. This notebook prints both and does not decide which one Section 6.3 minimized. Problem 1b at `(0.1, 2, 6)` is the dominant-pole value.
+
+**Expected.** The two ITAE prints match those published numbers within the tolerances in `tests/test_examples_smoke.py`. The settling listing is a different expression.
+
+**Interpretation.** Agreement of the ITAE function with the reduction section does not by itself say that the solving-section listing was unused.
 """,
                 "markdown",
             ),
@@ -196,6 +332,21 @@ from metaopt.applications import pid
 print(pid.objective_1a(*pid.WORKED_1A_UNSTABLE))
 print(pid.objective_1a(*pid.WORKED_1A_FEASIBLE))
 print(pid.objective_1b(*pid.WORKED_1B))
+print(pid.objective_1a_settling(*pid.WORKED_1A_FEASIBLE))
+""",
+            ),
+            cell(
+                """## Exercise
+
+Subtract the ITAE value from the settling-listing value at `(0.276, 0.765, 2.221)`. Record the difference for the editor. Do not delete either function.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+itae = pid.objective_1a(*pid.WORKED_1A_FEASIBLE)
+settling = pid.objective_1a_settling(*pid.WORKED_1A_FEASIBLE)
+print(abs(itae - settling))
 """,
             ),
         ],
@@ -206,7 +357,13 @@ print(pid.objective_1b(*pid.WORKED_1B))
             cell(
                 """# Chapter 6 — Mobile robot
 
-The crossing node set is infeasible. The second printed node set stays inside the workspace and outside the obstacles.
+**Goal.** Evaluate the two printed node sets.
+
+The crossing node set is infeasible and prints 35571448004.83873. The clear node set is feasible and prints 14.74322171254588.
+
+**Expected.** Those two objective values, with feasibility flags false and true.
+
+**Interpretation.** The large value is the penalty for an infeasible path, not a path length.
 """,
                 "markdown",
             ),
@@ -220,6 +377,20 @@ print(bad["fun"], bad["feasible"])
 print(good["fun"], good["feasible"])
 """,
             ),
+            cell(
+                """## Exercise
+
+Check that the infeasible value is larger than the feasible value by more than `1e6`. That gap is the penalty, not a second path length.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+print(bad["fun"] - good["fun"])
+if not (bad["fun"] > good["fun"] + 1e6):
+    raise SystemExit("the infeasible penalty was not visible")
+""",
+            ),
         ],
     )
     write(
@@ -228,7 +399,13 @@ print(good["fun"], good["feasible"])
             cell(
                 """# Chapter 6 — Crane polynomial reduction
 
-The first coefficient vector violates the speed bounds. The second does not. The long expression is parenthesized so a line wrap cannot break the sum.
+**Goal.** Evaluate the two printed coefficient vectors.
+
+The first vector is infeasible and prints 707599.2688799157. The second prints 0.4209773021079328. Its speed excess is about `6e-8` m/s, so the penalty is tiny and the feasibility flag treats a penalty below `1e-6` as inactive. The polynomial is unchanged.
+
+**Expected.** Those objective values. The second penalty is below `1e-6` and above 0.
+
+**Interpretation.** A prose note should say the speed constraint holds up to roundoff. Clipping the violation inside the formula would change the printed objective and is not done here.
 """,
                 "markdown",
             ),
@@ -239,7 +416,21 @@ from metaopt.applications import crane
 blocked = crane.polynomial_profiles(crane.WORKED_POLY_INFEASIBLE)
 clear = crane.polynomial_profiles(crane.WORKED_POLY_FEASIBLE)
 print(blocked["fun"], blocked["feasible"])
-print(clear["fun"], clear["feasible"])
+print(clear["fun"], clear["feasible"], clear["penalty"])
+""",
+            ),
+            cell(
+                """## Exercise
+
+Print `clear["penalty"]`. It should be positive and below `1e-6`. That is the floating-point speed excess, not a second crane model.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+print(clear["penalty"])
+if not (0.0 < clear["penalty"] < 1e-6):
+    raise SystemExit("the roundoff penalty was not in the expected range")
 """,
             ),
         ],
@@ -250,7 +441,13 @@ print(clear["fun"], clear["feasible"])
             cell(
                 """# Chapter 6 — Mountain car and cart-pole
 
-Smoke checks of the printed one-step maps and the two cart-pole parameter vectors. The terminal penalty stays a parenthesized conditional so it cannot be split into an illegal `else` line.
+**Goal.** Check the printed one-step maps and the two cart-pole parameter vectors.
+
+The terminal penalty stays a parenthesized conditional so a typesetter cannot split it into an illegal `else` line. No package is installed from this notebook.
+
+**Expected.** The feasible cart-pole vector prints `True`. The infeasible vector prints `False`. Mountain-car 4a at the feasible vector returns 90.
+
+**Interpretation.** These are direct evaluations of printed inputs. They are not traced copies of the chapter figures.
 """,
                 "markdown",
             ),
@@ -265,6 +462,19 @@ print(cart_pole.simulate(cart_pole.WORKED_FEASIBLE)["feasible"])
 print(cart_pole.simulate(cart_pole.WORKED_INFEASIBLE)["feasible"])
 """,
             ),
+            cell(
+                """## Exercise
+
+Evaluate mountain-car goals 4a and 4b at their feasible vectors. The printed objectives are 90 and 145.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+print(mountain_car.objective_4a(mountain_car.WORKED_4A_FEASIBLE))
+print(mountain_car.objective_4b(mountain_car.WORKED_4B_FEASIBLE))
+""",
+            ),
         ],
     )
     write(
@@ -273,7 +483,13 @@ print(cart_pole.simulate(cart_pole.WORKED_INFEASIBLE)["feasible"])
             cell(
                 """# Chapter 7 — Design listings
 
-A short PSO run on the pressure vessel. Feasibility is the penalty, not a claim that the known literature optimum was found.
+**Goal.** Run a four-generation PSO on the pressure-vessel penalty and report feasibility.
+
+Feasibility is the penalty. This run does not claim the known literature optimum.
+
+**Expected.** `nfev` is `8 * 4 = 32`. `fun` is finite. `feasible` may be false at this budget.
+
+**Interpretation.** A longer search would still be a new Generator experiment, not a reproduction of a printed design table, unless that table is checked number by number.
 """,
                 "markdown",
             ),
@@ -287,6 +503,20 @@ bounds = Bounds.from_pairs([[1, 99], [1, 99], [10, 200], [10, 200]])
 result = minimize(lambda x: pressure_vessel_components(x)["fun"], bounds, seed=11, population_size=8, iterations=4)
 details = pressure_vessel_components(result.x)
 print(details["fun"], details["feasible"], result.nfev)
+if result.nfev != 32 or not (details["fun"] == details["fun"]):
+    raise SystemExit("the design smoke run did not finish")
+""",
+            ),
+            cell(
+                """## Exercise
+
+Read `details["feasible"]`. If it is false, name the penalty rather than calling the vessel dimensions optimal.
+""",
+                "markdown",
+            ),
+            cell(
+                """
+print("feasible" if details["feasible"] else "penalty still active")
 """,
             ),
         ],
@@ -295,3 +525,4 @@ print(details["fun"], details["feasible"], result.nfev)
 
 if __name__ == "__main__":
     main()
+    subprocess.check_call([sys.executable, "-m", "ruff", "format", str(NOTEBOOKS)])

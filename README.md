@@ -50,7 +50,7 @@ print(result.fun, result.nfev, result.x)
 | Chapter 7, pressure vessel, gripper, beam listings | `src/metaopt/applications/engineering_design.py` |
 | SciPy's differential evolution, not the handbook DE | `examples/scipy_differential_evolution.py` |
 
-Notebooks `01` through `10` follow that order. `docs/book-code-map.md` lists manuscript listings, tables, and figures.
+Notebooks `01` through `10` follow that order. `docs/book-code-map.md` lists manuscript listings, tables, and figures. `docs/coverage-matrix.md` is the chapter-level status. `docs/release-readiness.md` is the no-go checklist. `docs/manuscript-replacements.md` holds editor text that still needs author approval.
 
 ## How to cite
 

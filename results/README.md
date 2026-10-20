@@ -15,3 +15,16 @@ Those files are not in this repository. Seeds in the manuscript listing are
 `BASE_SEED = 12345` passed to `np.random.seed`, which is the legacy NumPy
 stream. This library uses `numpy.random.Generator`, so the same integer does
 not replay that file even if the study is rerun.
+
+`reduced_comparison_summary.json` is the latest run of
+`scripts/reduced_statistical_comparison.py`. The same script also writes
+`reduced_comparison_py<version>.json` so a later Python does not erase the
+other interpreter's summary. Those files are a five-run Generator study on
+two functions and three algorithms. They are not Appendix C or Appendix E.
+`reference_minima.csv` is a direct evaluation at stated locations, not a search.
+
+`ci/` is written by `.github/workflows/ci.yml`. On a push to a branch other
+than `main`, the `publish-results` job copies the Linux pytest and notebook
+logs into that directory and commits them on the same branch. `summary.json`
+is that commit. `run-39376535919.json` records the earlier green run, which
+did not save pytest stdout. None of these files is Appendix C or Appendix E.

@@ -1,5 +1,7 @@
 # Errata proposed for the editorial manuscript
 
+Review status, 2026-10-19: code-side guards from items 4, 5, 6, 9, 10, and 12 are in the library and covered by tests. Items 2 and 8 (Problem 1a, Whitley) and the license/author question are waiting on the authors. Proposed before/after text for the editor is in `docs/manuscript-replacements.md`. This file does not apply those decisions.
+
 Rendered pages below are estimates from page-break markers in `Metaheuristic_Optimization_with_Python_Editorial_Edition.docx`. Word reports 346 pages; the counter used here ends at 347. The implementation brief cited pp. 224–226 for the PID listing, p. 231 for the crane, and pp. 289–298 for the benchmark appendix. In this file those passages are near rendered pages 187 (Problem 1a), 194–195 (crane polynomial), 203 (cart-pole penalty), and 272–279 (Appendix B). The suggestions are about the text, not about those brief page numbers.
 
 Each item gives the original excerpt, a corrected excerpt, and why an editor should look at it. Code in this repository keeps the Appendix B formulas unless a line could not run.

@@ -19,6 +19,11 @@ explanation table, figure schematic, or Jupyter magic rather than a library func
 No row is blank. Result plots in Appendices A, C, and E stay `unverified`:
 the full 100-run study was not repeated, and library figures are not substituted for the book's figures.
 
+Review note, 2026-10-19: chapter-level status, tests, and notebooks are in
+`docs/coverage-matrix.md`. Editor-facing before/after text is in
+`docs/manuscript-replacements.md`. The reduced Generator study is not a reason
+to change any Appendix C or Appendix E row from `unverified` to `verified`.
+
 | ID | Rendered page | Kind | Status | Repo path | First line or caption |
 | --- | --- | --- | --- | --- | --- |
 | F001 | 10 | figure | unverified | not claimed to match a printed figure or table | Figure 1.1 — Graphical interpretation of the positions of particles on the surface of the objective function f(x)=x² |

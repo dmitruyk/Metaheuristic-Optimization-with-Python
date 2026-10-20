@@ -11,6 +11,8 @@ Stochastic benchmarks (Quartic, Xin-She Yang) draw noise from
 
 from __future__ import annotations
 
+import warnings
+
 import numpy as np
 
 _noise_rng = np.random.default_rng(0)
@@ -139,8 +141,26 @@ def MichalewiczFunction(x):
 
 
 def PavianiFunction(x):
+    """Appendix B Paviani formula.
+
+    The logs are defined on the open interval ``(2, 10)``. A point outside
+    that interval is still passed through the same expression. NumPy's
+    invalid-log warning is replaced by one explicit warning, and the returned
+    value stays non-finite. The formula is not rewritten.
+    """
+
     x = np.asarray(x, dtype=float)
-    return float(np.sum(np.log(x - 2) ** 2 + np.log(10 - x) ** 2) - np.prod(x) ** 0.2)
+    outside = (x <= 2.0) | (x >= 10.0)
+    if np.any(outside):
+        warnings.warn(
+            "PavianiFunction is defined on the open interval (2, 10); "
+            f"{int(np.count_nonzero(outside))} coordinate(s) are outside it and the formula is non-finite there.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+    with np.errstate(invalid="ignore", divide="ignore"):
+        value = np.sum(np.log(x - 2) ** 2 + np.log(10 - x) ** 2) - np.prod(x) ** 0.2
+    return float(value)
 
 
 def PeriodicFunction(x):
@@ -453,3 +473,40 @@ def get_benchmark(name: str) -> tuple:
 
 def benchmark_names() -> list[str]:
     return [item[0] for item in BENCHMARKS]
+
+
+def outside_domain(name: str, point: np.ndarray | list[float]) -> np.ndarray:
+    """Boolean mask of coordinates outside the registered Appendix B box.
+
+    The box is the closed interval from :func:`benchmark_domain`. Paviani's
+    formula is only defined on ``(2, 10)``. The registered Paviani box is
+    ``[2.0001, 9.9999]``, which sits inside that open interval. This check
+    does not change the function value.
+    """
+
+    array = np.asarray(point, dtype=float).reshape(-1)
+    if array.size < 1:
+        raise ValueError("point must contain at least one coordinate")
+    get_benchmark(name)
+    index = benchmark_names().index(name)
+    domain = np.asarray(benchmark_domain(index, int(array.size)), dtype=float)
+    return (array < domain[:, 0]) | (array > domain[:, 1])
+
+
+def evaluate_benchmark(name: str, point: np.ndarray | list[float], *, strict: bool = False) -> float:
+    """Evaluate one Appendix B function and report registered-domain violations.
+
+    ``strict=True`` raises ``ValueError`` when any coordinate is outside the
+    box. The default still evaluates the formula, after a ``RuntimeWarning``.
+    Elliptic with fewer than two variables still raises from the formula.
+    """
+
+    array = np.asarray(point, dtype=float).reshape(-1)
+    mask = outside_domain(name, array)
+    if np.any(mask):
+        message = f"{name}: {int(np.count_nonzero(mask))} coordinate(s) are outside the registered domain"
+        if strict:
+            raise ValueError(message)
+        warnings.warn(message, RuntimeWarning, stacklevel=2)
+    function = get_benchmark(name)[1]
+    return float(function(array))

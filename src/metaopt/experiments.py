@@ -108,3 +108,36 @@ def compare(
             }
         )
     return rows
+
+
+def summarize_groups(rows: list[dict]) -> list[dict]:
+    """Median, extrema, mean, and sample standard deviation for labeled runs.
+
+    Rows need ``algorithm``, ``benchmark``, ``fun``, ``nfev``, and ``seconds``.
+    The sample standard deviation uses ``ddof=1``. A single run records 0.
+    This summary does not compare the rows with a printed table.
+    """
+
+    grouped: dict[tuple[str, str], list[dict]] = {}
+    for row in rows:
+        grouped.setdefault((str(row["algorithm"]), str(row["benchmark"])), []).append(row)
+    summary = []
+    for (algorithm, benchmark), items in grouped.items():
+        values = np.asarray([float(item["fun"]) for item in items], dtype=float)
+        evaluations = np.asarray([float(item["nfev"]) for item in items], dtype=float)
+        sample_std = float(np.std(values, ddof=1)) if values.size > 1 else 0.0
+        summary.append(
+            {
+                "algorithm": algorithm,
+                "benchmark": benchmark,
+                "runs": int(values.size),
+                "median": float(np.median(values)),
+                "minimum": float(np.min(values)),
+                "maximum": float(np.max(values)),
+                "mean": float(np.mean(values)),
+                "sample_std": sample_std,
+                "median_nfev": float(np.median(evaluations)),
+                "total_seconds": float(sum(float(item["seconds"]) for item in items)),
+            }
+        )
+    return summary
