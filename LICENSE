@@ -1,0 +1,15 @@
+Authors, in order: Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk.
+
+Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk hold the
+copyright in *Metaheuristic Optimization with Python* (2026). The handbook
+states that all rights are reserved and that reuse requires the publisher's
+prior written permission, with the usual allowance for brief quotation.
+
+This repository is a companion implementation of that handbook. On 19 October
+2026, Dmytro Komarchuk, as a co-author and the last author listed above, gave
+written approval to create this companion repository.
+
+No open-source license (MIT, Apache-2.0, GPL, or otherwise) has been selected.
+Approval to create the repository does not name one of those licenses. Until
+the authors name a license, do not treat these files as licensed for
+redistribution.

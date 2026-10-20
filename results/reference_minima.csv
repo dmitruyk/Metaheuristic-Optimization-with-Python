@@ -1,0 +1,24 @@
+benchmark,observed,printed,absolute_difference
+Spherical,0.0,0.0,0.0
+Ackley No. 1,4.440892098500626e-16,0.0,4.440892098500626e-16
+Alpine No. 1,0.0,0.0,0.0
+Chung-Reynolds,0.0,0.0,0.0
+Exponential,-1.0,-1.0,0.0
+Griewank,0.0,0.0,0.0
+Happy Cat,0.0,0.0,0.0
+Levy,1.4997597826618576e-32,0.0,1.4997597826618576e-32
+Periodic,0.9,0.9,0.0
+Rastrigin,0.0,0.0,0.0
+Rosenbrock,0.0,0.0,0.0
+Salomon,0.0,0.0,0.0
+Schwefel No. 2.20,0.0,0.0,0.0
+Sum of Squares,0.0,0.0,0.0
+Wavy,0.0,0.0,0.0
+Xin-She Yang No. 3,-1.0,-1.0,0.0
+Xin-She Yang No. 4,-1.0,-1.0,0.0
+Zakharov,0.0,0.0,0.0
+Quintic at -1,0.0,0.0,0.0
+Trigonometric No. 2,1.0,1.0,0.0
+Schwefel No. 2.26,-418.98288727243374,-418.9828872724338,5.684341886080802e-14
+Styblinski-Tang,-156.6646628150856,-156.66396,0.0007028150855887816
+Qing,3.944304526105059e-31,0.0,3.944304526105059e-31

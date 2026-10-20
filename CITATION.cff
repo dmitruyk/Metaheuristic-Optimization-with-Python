@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "Metaheuristic Optimization with Python"
+message: "Please cite the handbook. This companion software has no approved license and no published DOI."
+type: software
+authors:
+  - family-names: Romasevych
+    given-names: Yuriy
+  - family-names: Loveikin
+    given-names: Viatcheslav
+year: 2026
+preferred-citation:
+  type: book
+  title: "Metaheuristic Optimization with Python: Algorithms, Reproducible Experiments, and Engineering Applications"
+  authors:
+    - family-names: Romasevych
+      given-names: Yuriy
+    - family-names: Loveikin
+      given-names: Viatcheslav
+  year: 2026
+  notes: "Independently published. Reviewers named in the manuscript: Valentyn Sobchuk, Anatolii Khoroshun, and Viktor Nesvidomin."
