@@ -13,11 +13,12 @@ Time range of the checks in this section: 2026-10-20 05:55–05:56 UTC for GitHu
 | `pytest -q` on Python 3.11.7 | 60 passed, 15.79 s | 132 passed, 13.29 s | +72 tests |
 | `pytest -q` on Python 3.12.13 | 60 passed, 43.83 s | 132 passed, 14.89 s | +72 tests |
 | Linux CI on `main` | described in the historical section as not yet observed | run [39377458555](https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/39377458555) on `0fc55d5` succeeded for test 3.11, test 3.12, and notebooks | main is verified |
+| Linux CI on this branch | not started | run [39379558457](https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/39379558457) on `e6940ba` succeeded for test 3.11, test 3.12, notebooks, and publish-results | this branch is verified for that commit |
 | Committed CI log | `results/ci/summary.json` for `e85e014` | still that file; the workflow skips the results commit on `main` | the green main run is not copied into `results/ci/` |
 | Appendix C / Appendix E | not run | still not run; cost estimate is `results/full_experiment_cost_estimate.json` | labeled historical |
 | Worked scalars | matched in tests | 11 matched, 3 unmatched in `results/published_comparison.json` | Appendix C, Appendix E, and the settling-time value stay unmatched |
 
-`main` at `0fc55d5` passed GitHub Actions. Run `39377406220` (pull request, commit `d0b5c29609`) is recorded as a failure, and the jobs API returned zero jobs. Logs for that run returned HTTP 403 without authentication, so the failure has no job log in this session. It is not evidence that pytest failed. The next commit on `main` passed.
+`main` at `0fc55d5` passed GitHub Actions. This branch at `e6940ba` also passed, in run 39379558457. The workflow then wrote `results/ci/summary.json` as commit `d37e243`. A `GITHUB_TOKEN` push does not start another run, so `d37e243` is the log of `e6940ba`, not a separate test. Run `39377406220` (pull request, commit `d0b5c29609`) is recorded as a failure, and the jobs API returned zero jobs. Logs for that run returned HTTP 403 without authentication, so the failure has no job log in this session. It is not evidence that pytest failed. The next commit on `main` passed.
 
 Local commands for the library changes on this branch:
 

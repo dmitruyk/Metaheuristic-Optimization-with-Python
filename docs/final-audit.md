@@ -23,7 +23,7 @@ Run 39377406220, a pull request for `d0b5c29609`, is a recorded failure with zer
 | F5 | High | `LICENSE` names no open-source license. Copyright line has two authors; repository files have three | Record the discrepancy. Do not choose a license or reorder authors | `docs/authorship-and-license.md` | Open. Author decision |
 | F6 | Medium | Perm 0 table location `i-1` is not a minimizer; `1/i` is 0. Rotated lower bound printed `-65.53` against Appendix B `-65.536`. Xin-She Yang text said a normal draw on `[0, 1]` | Correct those table texts. Leave the formulas | manuscript script log; Perm test `Perm0DBetaFunction` at `i-1` is greater than 1 | Applied in the local review copy |
 | F7 | Medium | `results/ci/summary.json` is one commit behind the green `main` run, because publish-results skips `main` | Say so in the validation report. Do not describe Linux CI as unverified | run 39377458555 | Documented |
-| F8 | Medium | CI lacked an explicit doc-link check and a wheel build | Add both, plus the quick profile, to `.github/workflows/ci.yml` | workflow diff. This branch's Actions run is pending until the branch is pushed | Implemented locally. Not yet observed on GitHub |
+| F8 | Medium | CI lacked an explicit doc-link check and a wheel build | Add both, plus the quick profile, to `.github/workflows/ci.yml` | run [39379558457](https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/39379558457) on `e6940ba` succeeded for test 3.11, test 3.12, notebooks, and publish-results | Observed on GitHub |
 | F9 | Medium | Downloads editorial DOCX, Telegram DOCX, and `Documents/HANDBOOK.docx` are three files | Compare them before editing | hashes in `docs/final-change-summary.md`. No DOCX is in the GitHub repository | Compared. Editorial file is the review source |
 | F10 | Low | Print PDF and page-by-page visual QA | Render if a working converter is available, and do not call the DOCX KDP-ready without a visual pass | LibreOffice 6.3.4.2 exits with signal 6 on macOS 26.6.2 before opening either DOCX. No PDF file | Open. Environment limitation, not a reviewed page |
 
@@ -50,4 +50,4 @@ The review copy is `manuscript/Metaheuristic_Optimization_with_Python_reviewed.d
 | Accept or reject the Table 4.1 review copy | handbook authors | 2026-11-02 | new |
 | Decide whether Appendix C and Appendix E stay historical | handbook authors | 2026-11-16 | open |
 | Visual acceptance of the print PDF | editor designated by the authors | 2026-11-09 | open |
-| Confirm GitHub Actions on this branch after it is pushed | Dmytro Komarchuk | 2026-10-26 | open |
+| Confirm GitHub Actions on this branch after it is pushed | Dmytro Komarchuk | 2026-10-26 | closed by run 39379558457 on `e6940ba`. The following results commit `d37e243` was written by that workflow and does not start another run |
