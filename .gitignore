@@ -14,5 +14,8 @@ figures/generated/*
 results/*.npz
 results/*.xlsx
 manuscript_extract/
+manuscript/*.docx
+manuscript/*.pdf
+manuscript/.libreoffice/
 .DS_Store
 .cache/

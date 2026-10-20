@@ -40,6 +40,10 @@ jobs:
             ruff check .
             ruff format --check .
             pytest -q --junitxml="$RUNNER_TEMP/ci-out/pytest.xml"
+            python scripts/validate_doc_links.py
+            python -m pip wheel --no-deps -w "$RUNNER_TEMP/wheel" .
+            python scripts/handbook_experiment.py --profile quick --output "$RUNNER_TEMP/ci-out/quick_validation.json"
+            python scripts/handbook_experiment.py --profile full --output "$RUNNER_TEMP/ci-out/full_experiment_cost_estimate.json"
           } 2>&1 | tee "$RUNNER_TEMP/ci-out/pytest.log"
       - name: Upload results
         if: always()
@@ -48,6 +52,7 @@ jobs:
           name: pytest-${{ matrix.python-version }}
           path: ${{ runner.temp }}/ci-out/
           if-no-files-found: warn
+          retention-days: 14
 
   notebooks:
     runs-on: ubuntu-latest
@@ -70,6 +75,7 @@ jobs:
           name: notebooks
           path: ${{ runner.temp }}/ci-out/notebooks.log
           if-no-files-found: warn
+          retention-days: 14
 
   publish-results:
     needs: [test, notebooks]

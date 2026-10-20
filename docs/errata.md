@@ -26,9 +26,11 @@ penalty_terminal = (
 
 **Why.** The expression in the editorial DOCX parses. A line wrap that places `else` at the start of the next line, without parentheses, is a syntax error. The same risk applies to the Problem 1a solving-section line `penalty_terminal = 0.0 if np.allclose(...) else 1e8 * ...` on rendered page 203. Problem 1a's earlier ITAE listing does not use a conditional expression; it uses an `if` block and it parses. No mathematical change is proposed.
 
-## 2. Two different Problem 1a objectives
+## 2. Two different PID objectives
 
-**Where.** Reduction of Problem 1a (rendered page 187) and the solving-section listing (rendered page 203).
+**Where.** Section 6.3, reduction of Problem 1a, and Practical Exercise 1 after the Chapter 6 review questions.
+
+**Revised identification, 2026-10-20.** An earlier note in this file called the settling-time listing the solving section of Problem 1a. That identification is withdrawn. The exercise heading is "Practical Exercise No. 1", and its plant is `1/(1+s)**3`, not the Problem 1a plant `1/((s+1)(1+s/5+s^2))`. Section 6.3 says Problem 1a minimizes ITAE. The withdrawal is recorded because the paragraph sequence in the editorial DOCX shows the exercise after "Practical exercises for Chapter 6", not inside the Problem 1a reduction.
 
 **Original, solving section.** The return value adds a 2% settling time and an overshoot that is not divided by the setpoint:
 
@@ -46,7 +48,7 @@ itae = np.trapezoid(time * np.abs(r - y), time)
 return float(terminal_penalty + overshoot_penalty + itae)
 ```
 
-**Why.** Both listings are syntactically valid and they are not the same criterion. The worked sentences in the reduction section belong to the ITAE form. The repository keeps both, as `objective_1a` and `objective_1a_settling`. An editor should say which one Section 6.3 minimized.
+**Why.** The printed worked values match `objective_1a_itae`. `objective_1a_settling_time` keeps the settling expression on the Problem 1a plant and does not match those values. `objective_chapter6_exercise1_settling` is the exercise plant. None of the three replaces another.
 
 ## 3. Crane polynomial, line wrapping, and a floating-point penalty
 
@@ -106,7 +108,7 @@ print(...)
 
 Formulas in Table 4.1 are images, so the comparison is between the table's location/value columns and Appendix B.
 
-**Whitley.** Table 4.1 says location `0`, value `1`. Appendix B cites Jamil and Yang and evaluates to `0` at the all-ones vector. At the origin the code is not `1`. Keep the code. Correct the table location to the all-ones vector and the value to `0`, or show the derivation that produces `1` at the origin and change the code to match. Those two edits must be done together.
+**Whitley.** Table 4.1 columns are location, then value. The Whitley cells were location `0`, value `1`. Appendix B cites Jamil and Yang. At the all-ones vector the function is 0. At the origin, `y_ij = 1`, so the value is `D^2 (1/4000 - cos(1) + 1)`, which is 1.83979... for `D = 2` and is not 1. The table cells are the swapped pair of the correct location `1` and value `0`. The code is unchanged. `scripts/prepare_reviewed_manuscript.py` writes that cell correction into a local review copy.
 
 **Xin-She Yang.** The table text says the random factor is normally distributed on `[0, 1]`. A normal draw is not confined to `[0, 1]`. The code uses `np.random.random`, which is uniform on `[0, 1)`. Correct the table to say uniform on `[0, 1)`.
 

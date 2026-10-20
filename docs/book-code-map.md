@@ -24,6 +24,27 @@ Review note, 2026-10-19: chapter-level status, tests, and notebooks are in
 `docs/manuscript-replacements.md`. The reduced Generator study is not a reason
 to change any Appendix C or Appendix E row from `unverified` to `verified`.
 
+Companion links, 2026-10-20. No release tag exists, so these follow `main`.
+They are also inserted into the local review DOCX by
+`scripts/prepare_reviewed_manuscript.py`. A QR code was not added: a code that
+points at moving `main` would go stale, and there is no release URL yet.
+
+| Section | Link label | Path |
+| --- | --- | --- |
+| Chapter 1 | PSO and variants | `notebooks/01_particle_swarm.ipynb` |
+| Chapter 2 | Differential Evolution and SADE | `notebooks/02_differential_evolution.ipynb` |
+| Chapter 3 | Grey Wolf Optimizer | `notebooks/03_grey_wolf_optimizer.ipynb` |
+| Chapter 4 | Benchmark functions | `notebooks/04_benchmarks.ipynb` |
+| Chapter 5 | Statistical comparisons | `notebooks/05_fair_comparisons.ipynb` |
+| Chapter 6 | PID tuning | `notebooks/06_pid_tuning.ipynb` |
+| Chapter 6 | Robot path | `notebooks/07_robot_path_planning.ipynb` |
+| Chapter 6 | Crane | `notebooks/08_crane_control.ipynb` |
+| Chapter 6 | Cart-pole | `notebooks/09_cart_pole.ipynb` |
+| Chapter 7 | Engineering design | `notebooks/10_engineering_design.ipynb` |
+| Appendix B | Benchmark implementations | `src/metaopt/benchmarks.py` |
+| Appendix C | Protocol and reproduction limits | `docs/experiment-protocol.md` |
+| Appendix E | Timing protocol | `docs/reproducibility.md` |
+
 | ID | Rendered page | Kind | Status | Repo path | First line or caption |
 | --- | --- | --- | --- | --- | --- |
 | F001 | 10 | figure | unverified | not claimed to match a printed figure or table | Figure 1.1 — Graphical interpretation of the positions of particles on the surface of the objective function f(x)=x² |

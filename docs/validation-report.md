@@ -1,6 +1,43 @@
 # Validation report
 
-Phase: Validation. This is a local macOS run, not a GitHub-hosted Linux run and not a live deployment.
+Phase: Validation.
+
+## Current status (2026-10-20 UTC)
+
+This section is the latest evidence. The sections below it are historical local notes from 2026-10-19 and are not restated as the current CI result.
+
+Time range of the checks in this section: 2026-10-20 05:55–05:56 UTC for GitHub Actions, and the local session on 2026-10-19 22:57 America/Los_Angeles onward. Data source: this checkout and the GitHub Actions API for `dmitruyk/Metaheuristic-Optimization-with-Python`. Execution: local computation on one Mac, plus GitHub-hosted `ubuntu-latest`. Not paper trading and not live execution.
+
+| Metric | Previous review (2026-10-19) | This status | Delta |
+| --- | --- | --- | --- |
+| `pytest -q` on Python 3.11.7 | 60 passed, 15.79 s | 132 passed, 13.29 s | +72 tests |
+| `pytest -q` on Python 3.12.13 | 60 passed, 43.83 s | 132 passed, 14.89 s | +72 tests |
+| Linux CI on `main` | described in the historical section as not yet observed | run [39377458555](https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/39377458555) on `0fc55d5` succeeded for test 3.11, test 3.12, and notebooks | main is verified |
+| Committed CI log | `results/ci/summary.json` for `e85e014` | still that file; the workflow skips the results commit on `main` | the green main run is not copied into `results/ci/` |
+| Appendix C / Appendix E | not run | still not run; cost estimate is `results/full_experiment_cost_estimate.json` | labeled historical |
+| Worked scalars | matched in tests | 11 matched, 3 unmatched in `results/published_comparison.json` | Appendix C, Appendix E, and the settling-time value stay unmatched |
+
+`main` at `0fc55d5` passed GitHub Actions. Run `39377406220` (pull request, commit `d0b5c29609`) is recorded as a failure, and the jobs API returned zero jobs. Logs for that run returned HTTP 403 without authentication, so the failure has no job log in this session. It is not evidence that pytest failed. The next commit on `main` passed.
+
+Local commands for the library changes on this branch:
+
+```bash
+.venv/bin/ruff check .
+.venv/bin/ruff format --check .
+.venv/bin/pytest -q
+.venv/bin/python scripts/handbook_experiment.py --profile quick
+.venv/bin/python scripts/handbook_experiment.py --profile full
+.venv/bin/python scripts/compare_published_values.py
+MPLBACKEND=Agg MPLCONFIGDIR=.cache/matplotlib IPYTHONDIR=.cache/ipython JUPYTER_CONFIG_DIR=.cache/jupyter .venv/bin/python scripts/execute_notebooks.py
+```
+
+Python 3.11.7, NumPy 2.4.6, platform `macOS-26.6.2-x86_64-i386-64bit`. Pytest: 132 passed in 13.29 s. The same tree on Python 3.12.13: 132 passed in 14.89 s. Notebooks 01–10: exit code 0. Quick validation: 0.032 s, `matches_appendix_c` false, file `results/quick_validation_summary.json`. Full profile: not executed. Nominal cost 945000000 objective evaluations, about 8.8–65.6 hours at 30000 and 4000 evaluations per second. `scripts/validate_doc_links.py` on the local review DOCX: 0 missing repository paths, 8 external citation links not fetched.
+
+LibreOffice 6.3.4.2 (`60da17e045e08f1793c57c00ba83cdfce946d0aa`) aborts with signal 6 on this Mac before it opens a file. The same abort happens for the editorial source DOCX and for `manuscript/Metaheuristic_Optimization_with_Python_reviewed.docx`. No PDF was written. Page-by-page visual QA is therefore not done in this session. KDP approval stays pending.
+
+## Historical local report
+
+Phase: Validation. This historical section is a local macOS run, not a GitHub-hosted Linux run and not a live deployment. It is kept so the earlier numbers stay next to the current ones. Do not read its "Linux CI not observed" sentences as the current status; run 39377458555 supersedes them.
 
 ## Environment
 
