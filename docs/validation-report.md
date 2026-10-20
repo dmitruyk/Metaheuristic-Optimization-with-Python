@@ -17,7 +17,7 @@ Phase: Validation. This is a local macOS run, not a GitHub-hosted Linux run and 
 | Data source | Editorial DOCX `Metaheuristic_Optimization_with_Python_Editorial_Edition.docx`, plus executions in this checkout |
 | Execution | Local computation. Not paper trading and not live execution. |
 
-Python 3.12 and Ubuntu were not executed in this session. The Actions workflow is stored at `ci/ci.yml` and is written to run both on Linux. It is not under `.github/workflows/`, so Actions does not run it until that copy is made. That workflow has not been observed here.
+Python 3.12 and Ubuntu were not executed in this session. `.github/workflows/ci.yml` runs both on Linux. That workflow has not been observed here.
 
 ## Commands
 

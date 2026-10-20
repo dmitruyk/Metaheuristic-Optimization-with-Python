@@ -5,12 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "metaopt"
 version = "0.1.0"
-description = "Companion code for Metaheuristic Optimization with Python by Yuriy Romasevych and Viatcheslav Loveikin."
+description = "Companion code for Metaheuristic Optimization with Python by Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk."
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
   {name = "Yuriy Romasevych"},
   {name = "Viatcheslav Loveikin"},
+  {name = "Dmytro Komarchuk"},
 ]
 keywords = ["optimization", "pso", "differential-evolution", "grey-wolf-optimizer"]
 dependencies = [

@@ -1,6 +1,6 @@
 """Companion library for *Metaheuristic Optimization with Python*.
 
-Authors of the handbook: Yuriy Romasevych and Viatcheslav Loveikin.
+Authors of the handbook: Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk.
 This package implements the published algorithms. It does not replace them
 with third-party solvers. ``metaopt.de.scipy_minimize`` is an explicitly
 separate SciPy baseline.

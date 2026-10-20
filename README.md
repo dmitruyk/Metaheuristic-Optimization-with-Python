@@ -1,6 +1,6 @@
 # Metaheuristic Optimization with Python
 
-Companion code for the handbook by **Yuriy Romasevych** and **Viatcheslav Loveikin** (independently published, 2026). The algorithms, benchmark formulas, and engineering models follow the manuscript. This repository does not replace PSO, DE, or GWO with an unrelated package.
+Companion code for the handbook by **Yuriy Romasevych**, **Viatcheslav Loveikin**, and **Dmytro Komarchuk** (independently published, 2026). The algorithms, benchmark formulas, and engineering models follow the manuscript. This repository does not replace PSO, DE, or GWO with an unrelated package.
 
 No public repository URL is stated here. The authors have not approved a license; see `LICENSE`.
 
@@ -56,7 +56,7 @@ Notebooks `01` through `10` follow that order. `docs/book-code-map.md` lists man
 
 Cite the handbook. A machine-readable record is in `CITATION.cff`:
 
-Romasevych, Yuriy, and Loveikin, Viatcheslav. *Metaheuristic Optimization with Python: Algorithms, Reproducible Experiments, and Engineering Applications.* 2026.
+Romasevych, Yuriy, Loveikin, Viatcheslav, and Komarchuk, Dmytro. *Metaheuristic Optimization with Python: Algorithms, Reproducible Experiments, and Engineering Applications.* 2026.
 
 ## Reproducibility
 

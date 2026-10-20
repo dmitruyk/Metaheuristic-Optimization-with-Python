@@ -7,6 +7,8 @@ authors:
     given-names: Yuriy
   - family-names: Loveikin
     given-names: Viatcheslav
+  - family-names: Komarchuk
+    given-names: Dmytro
 year: 2026
 preferred-citation:
   type: book
@@ -16,5 +18,7 @@ preferred-citation:
       given-names: Yuriy
     - family-names: Loveikin
       given-names: Viatcheslav
+    - family-names: Komarchuk
+      given-names: Dmytro
   year: 2026
   notes: "Independently published. Reviewers named in the manuscript: Valentyn Sobchuk, Anatolii Khoroshun, and Viktor Nesvidomin."
