@@ -3,20 +3,24 @@
   "matches_appendix_c": false,
   "matches_appendix_e": false,
   "statement": "Linux GitHub Actions output committed by the ci workflow. These files are not a reproduction of Appendix C or Appendix E.",
-  "run_id": "39377284980",
-  "run_url": "https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/39377284980",
-  "sha": "e85e0143f9667cde12265f52fe0da0cecfa24393",
-  "ref": "refs/heads/review/reproducibility-2026-10-19",
+  "run_id": "39379558457",
+  "run_url": "https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/39379558457",
+  "sha": "e6940baba6a470d6b83eafbcb8771b156844a9d3",
+  "ref": "refs/heads/quality/final-repository-2026-10-19",
   "event": "push",
   "test_result": "success",
   "notebooks_result": "success",
   "files": [
     "notebooks-notebooks.log",
     "pytest-3.11-env.json",
+    "pytest-3.11-full_experiment_cost_estimate.json",
     "pytest-3.11-pytest.log",
     "pytest-3.11-pytest.xml",
+    "pytest-3.11-quick_validation.json",
     "pytest-3.12-env.json",
+    "pytest-3.12-full_experiment_cost_estimate.json",
     "pytest-3.12-pytest.log",
-    "pytest-3.12-pytest.xml"
+    "pytest-3.12-pytest.xml",
+    "pytest-3.12-quick_validation.json"
   ]
 }
