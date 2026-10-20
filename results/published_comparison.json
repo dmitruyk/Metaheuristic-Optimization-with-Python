@@ -1,0 +1,139 @@
+{
+  "relative_tolerance": 1e-06,
+  "absolute_tolerance": 1e-08,
+  "matched_count": 11,
+  "unmatched_count": 3,
+  "matches_appendix_c": false,
+  "matches_appendix_e": false,
+  "rows": [
+    {
+      "area": "Problem 1a ITAE",
+      "point": "(0.1, 1, 9)",
+      "observed": 19655252.199124757,
+      "published": 19655252.199124742,
+      "absolute_difference": 1.4901161193847656e-08,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Problem 1a ITAE",
+      "point": "(0.276, 0.765, 2.221)",
+      "observed": 18.79604614140255,
+      "published": 18.796046141402556,
+      "absolute_difference": 7.105427357601002e-15,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Problem 1b dominant pole",
+      "point": "(0.1, 2, 6)",
+      "observed": -0.036514370221270194,
+      "published": -0.036514370221270194,
+      "absolute_difference": 0.0,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Robot path",
+      "point": "infeasible nodes",
+      "observed": 35571448004.83873,
+      "published": 35571448004.83873,
+      "absolute_difference": 0.0,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Robot path",
+      "point": "feasible nodes",
+      "observed": 14.74322171254588,
+      "published": 14.74322171254588,
+      "absolute_difference": 0.0,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Crane polynomial",
+      "point": "infeasible coefficients",
+      "observed": 707599.2688799157,
+      "published": 707599.2688799157,
+      "absolute_difference": 0.0,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Crane polynomial",
+      "point": "feasible coefficients",
+      "observed": 0.4209773021079328,
+      "published": 0.4209773021079328,
+      "absolute_difference": 0.0,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Mountain car 4a",
+      "point": "feasible",
+      "observed": 90.0,
+      "published": 90.0,
+      "absolute_difference": 0.0,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Mountain car 4b",
+      "point": "feasible",
+      "observed": 145.0,
+      "published": 145.0,
+      "absolute_difference": 0.0,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Cart-pole",
+      "point": "feasible vector",
+      "observed": 4.350040156962044,
+      "published": 4.350040156962044,
+      "absolute_difference": 0.0,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Cart-pole",
+      "point": "infeasible vector",
+      "observed": 1224151813560.3403,
+      "published": 1224151813560.341,
+      "absolute_difference": 0.000732421875,
+      "relative_tolerance": 1e-06,
+      "absolute_tolerance": 1e-08,
+      "status": "matched"
+    },
+    {
+      "area": "Problem 1a settling-time on the Problem 1a plant",
+      "point": "(0.276, 0.765, 2.221)",
+      "observed": 16.3,
+      "published": 18.796046141402556,
+      "status": "unmatched",
+      "reason": "The printed feasible value belongs to the ITAE objective. The settling-time value is a different criterion and is not expected to match."
+    },
+    {
+      "area": "Appendix C",
+      "status": "unmatched",
+      "reason": "The printed rank tables and box-plot statistics are not stored as machine-readable cells in this repository. The quick Generator study must not be substituted for them."
+    },
+    {
+      "area": "Appendix E",
+      "status": "unmatched",
+      "reason": "The printed timing workbook was not recomputed. Historical settings are 20 runs, population 25, 500 iterations, dimension 30, legacy RandomState."
+    }
+  ],
+  "statement": "Matched rows are worked scalars. Appendix C and Appendix E stay unmatched."
+}

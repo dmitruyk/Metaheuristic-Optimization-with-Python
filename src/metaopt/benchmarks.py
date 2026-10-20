@@ -180,6 +180,12 @@ def PermDBetaFunction(x):
 
 
 def Perm0DBetaFunction(x):
+    """Perm 0, d, β from Appendix B.
+
+    The value is 0 at ``x_i = 1/i`` (β = 10 in this listing). Table 4.1 prints
+    the location as ``i-1``, which is not a minimizer of this formula.
+    """
+
     x = np.asarray(x, dtype=float)
     D = x.size
     j = np.arange(1, D + 1, dtype=float)
@@ -345,7 +351,16 @@ def WeierstrassFunction(x):
 
 
 def WhitleyFunction(x):
-    # Jamil & Yang: sum_i sum_j [y^2/4000 - cos(y) + 1],  y = 100(x_i^2-x_j)^2 + (1-x_j)^2
+    """Whitley function as printed in Appendix B, following Jamil and Yang.
+
+    ``y_ij = 100 (x_i^2 - x_j)^2 + (1 - x_j)^2`` and
+    ``f = sum_i sum_j (y_ij^2 / 4000 - cos(y_ij) + 1)``.
+    The minimum is 0 at the all-ones vector. At the origin every ``y_ij`` is 1,
+    so ``f(0) = D^2 (1/4000 - cos(1) + 1)``, which is not 1.
+    Table 4.1 lists location 0 and value 1. Those two cells are the swapped
+    pair. This function is not edited to match that row.
+    """
+
     x = np.asarray(x, dtype=float)
     q = 100 * (x[:, None] ** 2 - x[None, :]) ** 2 + (1 - x[None, :]) ** 2
     return float(np.sum(q**2 / 4000 - np.cos(q) + 1))

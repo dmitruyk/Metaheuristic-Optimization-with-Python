@@ -91,6 +91,8 @@ def test_known_reference_values():
     assert PermDBetaFunction(perm) == pytest.approx(0.0, abs=1e-8)
     perm0 = 1 / np.arange(1, 5, dtype=float)
     assert Perm0DBetaFunction(perm0) == pytest.approx(0.0, abs=1e-8)
+    table_location = np.arange(1, 5, dtype=float) - 1
+    assert Perm0DBetaFunction(table_location) > 1.0
     schwefel = np.full(3, SCHWEFEL_226_POINT)
     assert Schwefel226Function(schwefel) == pytest.approx(-418.9828872724338, rel=1e-6)
     style = np.full(3, -2.903534)
@@ -101,13 +103,16 @@ def test_known_reference_values():
     assert TridFunction(trid_x) == pytest.approx(expected, rel=1e-10)
 
 
-def test_whitley_table_disagrees_with_the_listing():
-    # Table 4.1 says the minimum is 1 at the origin. Appendix B, citing
-    # Jamil and Yang, is 0 at the all-ones vector.
-    assert WhitleyFunction(np.ones(2)) == pytest.approx(0.0, abs=1e-10)
-    at_origin = WhitleyFunction(np.zeros(2))
+@pytest.mark.parametrize("dimension", [1, 2, 4, 30])
+def test_whitley_minimum_is_zero_at_the_all_ones_vector(dimension):
+    # Jamil and Yang, and Appendix B: f = 0 at x = (1, ..., 1).
+    # At the origin every pair term uses y = 1, so
+    # f(0) = D^2 * (1/4000 - cos(1) + 1), which is not the Table 4.1 value 1.
+    assert WhitleyFunction(np.ones(dimension)) == pytest.approx(0.0, abs=1e-12)
+    at_origin = WhitleyFunction(np.zeros(dimension))
+    expected = dimension**2 * (1.0 / 4000.0 - np.cos(1.0) + 1.0)
+    assert at_origin == pytest.approx(expected, rel=1e-12, abs=1e-12)
     assert at_origin != pytest.approx(1.0, abs=1e-6)
-    assert at_origin > 0
 
 
 def test_alpine2_is_finite_on_its_closed_domain():

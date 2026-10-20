@@ -141,3 +141,31 @@ def summarize_groups(rows: list[dict]) -> list[dict]:
             }
         )
     return summary
+
+
+def rank_by_median(summary: list[dict]) -> list[dict]:
+    """Rank algorithms inside each benchmark by ascending median.
+
+    Ties share the best rank in the tie (1, 2, 2, 4). The rank is for a
+    minimization summary produced by :func:`summarize_groups`. It does not
+    reproduce a printed Chapter 5 or Appendix C rank table.
+    """
+
+    grouped: dict[str, list[dict]] = {}
+    for row in summary:
+        grouped.setdefault(str(row["benchmark"]), []).append(row)
+    ranked = []
+    for benchmark, items in grouped.items():
+        ordered = sorted(items, key=lambda item: (float(item["median"]), str(item["algorithm"])))
+        previous = None
+        previous_rank = 0
+        for index, item in enumerate(ordered, start=1):
+            median = float(item["median"])
+            if previous is not None and median == previous:
+                rank = previous_rank
+            else:
+                rank = index
+                previous_rank = index
+            previous = median
+            ranked.append({**item, "benchmark": benchmark, "median_rank": rank})
+    return ranked

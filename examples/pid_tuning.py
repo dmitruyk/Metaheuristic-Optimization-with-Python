@@ -17,7 +17,7 @@ def main() -> None:
     unstable = pid.objective_1a(*pid.WORKED_1A_UNSTABLE)
     feasible = pid.objective_1a(*pid.WORKED_1A_FEASIBLE)
     dominant = pid.objective_1b(*pid.WORKED_1B)
-    print(f"Problem 1a at (0.1, 1, 9): {unstable:.6f}")
+    print(f"Problem 1a ITAE at (0.1, 1, 9): {unstable:.6f}")
     print(f"printed value: {pid.WORKED_1A_UNSTABLE_VALUE:.6f}")
     print(f"absolute difference: {abs(unstable - pid.WORKED_1A_UNSTABLE_VALUE):.6g}")
     print(f"Problem 1a at (0.276, 0.765, 2.221): {feasible:.6f}")

@@ -62,5 +62,5 @@ select = ["E", "F", "I", "UP"]
 "scripts/write_notebooks.py" = ["E501"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 testpaths = ["tests"]

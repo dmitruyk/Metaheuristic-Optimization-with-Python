@@ -317,11 +317,11 @@ if rows[0]["nfev"] > rows[0]["max_evaluations"]:
 
 **Goal.** Evaluate the printed Problem 1a and Problem 1b points.
 
-`objective_1a` is the ITAE reduction. The printed numbers 19655252.199124742 and 18.796046141402556 belong to that reduction. `objective_1a_settling` is the other listing in the solving section. This notebook prints both and does not decide which one Section 6.3 minimized. Problem 1b at `(0.1, 2, 6)` is the dominant-pole value.
+`objective_1a_itae` (also available as `objective_1a`) is the Section 6.3 ITAE objective. The printed numbers 19655252.199124742 and 18.796046141402556 belong to that function. `objective_1a_settling_time` is the settling-time expression on the same Problem 1a plant; it does not match those numbers. Practical Exercise 1 uses the settling-time expression on a different plant, `1/(1+s)**3`, implemented as `objective_chapter6_exercise1_settling`.
 
-**Expected.** The two ITAE prints match those published numbers within the tolerances in `tests/test_examples_smoke.py`. The settling listing is a different expression.
+**Expected.** The two ITAE prints match those published numbers within the tolerances in `tests/test_examples_smoke.py`. The settling value at the same gains does not.
 
-**Interpretation.** Agreement of the ITAE function with the reduction section does not by itself say that the solving-section listing was unused.
+**Interpretation.** Section 6.3 states that Problem 1a minimizes ITAE. The exercise is a separate task. Both functions stay in the library.
 """,
                 "markdown",
             ),
@@ -329,23 +329,24 @@ if rows[0]["nfev"] > rows[0]["max_evaluations"]:
                 """
 from metaopt.applications import pid
 
-print(pid.objective_1a(*pid.WORKED_1A_UNSTABLE))
-print(pid.objective_1a(*pid.WORKED_1A_FEASIBLE))
+print(pid.objective_1a_itae(*pid.WORKED_1A_UNSTABLE))
+print(pid.objective_1a_itae(*pid.WORKED_1A_FEASIBLE))
 print(pid.objective_1b(*pid.WORKED_1B))
-print(pid.objective_1a_settling(*pid.WORKED_1A_FEASIBLE))
+print(pid.objective_1a_settling_time(*pid.WORKED_1A_FEASIBLE))
+print(pid.objective_chapter6_exercise1_settling(1.0, 1.0, 1.0))
 """,
             ),
             cell(
                 """## Exercise
 
-Subtract the ITAE value from the settling-listing value at `(0.276, 0.765, 2.221)`. Record the difference for the editor. Do not delete either function.
+Subtract the ITAE value from the Problem 1a settling-time value at `(0.276, 0.765, 2.221)`. The difference should not be zero. Do not delete either function.
 """,
                 "markdown",
             ),
             cell(
                 """
-itae = pid.objective_1a(*pid.WORKED_1A_FEASIBLE)
-settling = pid.objective_1a_settling(*pid.WORKED_1A_FEASIBLE)
+itae = pid.objective_1a_itae(*pid.WORKED_1A_FEASIBLE)
+settling = pid.objective_1a_settling_time(*pid.WORKED_1A_FEASIBLE)
 print(abs(itae - settling))
 """,
             ),
