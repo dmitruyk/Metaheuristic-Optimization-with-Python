@@ -26,7 +26,7 @@
       5.12
     ]
   },
-  "elapsed_seconds": 0.01782997800000885,
+  "elapsed_seconds": 0.03198856000000205,
   "summary": [
     {
       "algorithm": "PSO",
@@ -38,7 +38,7 @@
       "mean": 3.004136579240871,
       "sample_std": 1.8539444601511177,
       "median_nfev": 64.0,
-      "total_seconds": 0.0011816969999358662
+      "total_seconds": 0.0023314389999882223
     },
     {
       "algorithm": "DE/rand",
@@ -50,7 +50,7 @@
       "mean": 8.861743840985731,
       "sample_std": 7.243237097611972,
       "median_nfev": 64.0,
-      "total_seconds": 0.002567360999989887
+      "total_seconds": 0.006133735000005913
     },
     {
       "algorithm": "GWO",
@@ -62,7 +62,7 @@
       "mean": 2.579875666031224,
       "sample_std": 1.1238443675226955,
       "median_nfev": 64.0,
-      "total_seconds": 0.0010787710000386141
+      "total_seconds": 0.0020554079999897112
     },
     {
       "algorithm": "PSO",
@@ -74,7 +74,7 @@
       "mean": 25.759023828763308,
       "sample_std": 3.5984479523534922,
       "median_nfev": 64.0,
-      "total_seconds": 0.0012624489999666366
+      "total_seconds": 0.0023553230000032954
     },
     {
       "algorithm": "DE/rand",
@@ -86,7 +86,7 @@
       "mean": 41.42313888906008,
       "sample_std": 0.9928262349034067,
       "median_nfev": 64.0,
-      "total_seconds": 0.0026728409999918767
+      "total_seconds": 0.006205239000010465
     },
     {
       "algorithm": "GWO",
@@ -98,7 +98,7 @@
       "mean": 26.296224057486945,
       "sample_std": 12.743698225842456,
       "median_nfev": 64.0,
-      "total_seconds": 0.001395290000004934
+      "total_seconds": 0.0026009249999958683
     }
   ],
   "ranks": [
@@ -112,7 +112,7 @@
       "mean": 2.579875666031224,
       "sample_std": 1.1238443675226955,
       "median_nfev": 64.0,
-      "total_seconds": 0.0010787710000386141,
+      "total_seconds": 0.0020554079999897112,
       "median_rank": 1
     },
     {
@@ -125,7 +125,7 @@
       "mean": 3.004136579240871,
       "sample_std": 1.8539444601511177,
       "median_nfev": 64.0,
-      "total_seconds": 0.0011816969999358662,
+      "total_seconds": 0.0023314389999882223,
       "median_rank": 2
     },
     {
@@ -138,7 +138,7 @@
       "mean": 8.861743840985731,
       "sample_std": 7.243237097611972,
       "median_nfev": 64.0,
-      "total_seconds": 0.002567360999989887,
+      "total_seconds": 0.006133735000005913,
       "median_rank": 3
     },
     {
@@ -151,7 +151,7 @@
       "mean": 25.759023828763308,
       "sample_std": 3.5984479523534922,
       "median_nfev": 64.0,
-      "total_seconds": 0.0012624489999666366,
+      "total_seconds": 0.0023553230000032954,
       "median_rank": 1
     },
     {
@@ -164,7 +164,7 @@
       "mean": 26.296224057486945,
       "sample_std": 12.743698225842456,
       "median_nfev": 64.0,
-      "total_seconds": 0.001395290000004934,
+      "total_seconds": 0.0026009249999958683,
       "median_rank": 2
     },
     {
@@ -177,7 +177,7 @@
       "mean": 41.42313888906008,
       "sample_std": 0.9928262349034067,
       "median_nfev": 64.0,
-      "total_seconds": 0.0026728409999918767,
+      "total_seconds": 0.006205239000010465,
       "median_rank": 3
     }
   ],
@@ -192,7 +192,7 @@
       "seed": 12345,
       "fun": 1.693199879524783,
       "nfev": 64,
-      "seconds": 0.000696652999977232,
+      "seconds": 0.001315145999996048,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -208,7 +208,7 @@
       "seed": 12345,
       "fun": 3.740001771522339,
       "nfev": 64,
-      "seconds": 0.0014089900000158195,
+      "seconds": 0.0033835090000025048,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -224,7 +224,7 @@
       "seed": 12345,
       "fun": 1.7851976927576194,
       "nfev": 64,
-      "seconds": 0.0005834020000179407,
+      "seconds": 0.0012516460000000507,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -240,7 +240,7 @@
       "seed": 12345,
       "fun": 28.30351077761931,
       "nfev": 64,
-      "seconds": 0.0006474389999766572,
+      "seconds": 0.0014161050000041087,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -256,7 +256,7 @@
       "seed": 12345,
       "fun": 40.72110472581997,
       "nfev": 64,
-      "seconds": 0.0013536569999814674,
+      "seconds": 0.003603191999999922,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -272,7 +272,7 @@
       "seed": 12345,
       "fun": 17.285068624598768,
       "nfev": 64,
-      "seconds": 0.0007051160000060008,
+      "seconds": 0.0015757259999986672,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -288,7 +288,7 @@
       "seed": 12346,
       "fun": 4.31507327895696,
       "nfev": 64,
-      "seconds": 0.00048504399995863423,
+      "seconds": 0.0010162929999921744,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -304,7 +304,7 @@
       "seed": 12346,
       "fun": 13.983485910449124,
       "nfev": 64,
-      "seconds": 0.0011583709999740677,
+      "seconds": 0.0027502260000034084,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -320,7 +320,7 @@
       "seed": 12346,
       "fun": 3.3745536393048283,
       "nfev": 64,
-      "seconds": 0.0004953690000206734,
+      "seconds": 0.0008037619999896606,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -336,7 +336,7 @@
       "seed": 12346,
       "fun": 23.214536879907307,
       "nfev": 64,
-      "seconds": 0.0006150099999899794,
+      "seconds": 0.0009392179999991868,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -352,7 +352,7 @@
       "seed": 12346,
       "fun": 42.125173052300184,
       "nfev": 64,
-      "seconds": 0.0013191840000104094,
+      "seconds": 0.0026020470000105433,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -368,7 +368,7 @@
       "seed": 12346,
       "fun": 35.30737949037512,
       "nfev": 64,
-      "seconds": 0.0006901739999989331,
+      "seconds": 0.001025198999997201,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
