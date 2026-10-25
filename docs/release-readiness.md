@@ -15,7 +15,7 @@ KDP-ready is not claimed. A high-resolution PDF and a visual check of equations,
 | 3 | Problem 1a criterion named in Section 6.3 | 🟢 ITAE, matched to the printed scalars. Exercise 1 is a different plant | `results/published_comparison.json` |
 | 4 | Appendix C tables reproduced or explicitly labeled historical | 🟡 labeled historical. Cost estimated. Not run | `results/full_experiment_cost_estimate.json` |
 | 5 | Appendix E timings reproduced or explicitly labeled historical | 🟡 labeled historical. Not run | `docs/experiment-protocol.md` |
-| 6 | Python 3.11 and 3.12 unit tests green on GitHub-hosted Linux | 🟢 run 39380621540 on merge `c803af2`. `publish-results` skipped on `main` by the workflow condition | `docs/validation-report.md` |
+| 6 | Python 3.11 and 3.12 unit tests green on GitHub-hosted Linux | 🟢 run 39380621540 on `c803af2`, and run 40239854669 on `a36d610` | `docs/validation-report.md` |
 | 7 | Notebooks 01–10 execute from a clean checkout on Linux | 🟢 the notebooks job in that run succeeded | same Actions run |
 | 8 | Book links resolve | 🟡 repository markdown links resolve. The review DOCX adds chapter links to `main`. The Downloads source still has no repository links | `python scripts/validate_doc_links.py` |
 | 9 | Every published figure and table marked verified or unverified | 🟢 recorded | `docs/book-code-map.md` and `docs/coverage-matrix.md`; figures stay unverified |

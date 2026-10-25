@@ -26,7 +26,7 @@ There is no pinned cross-platform lock used by GitHub Actions. Local snapshots a
 
 Previous week, 2026-10-20: local pytest 132 passed on Python 3.11.7 (13.29 s) and 3.12.13 (14.89 s). Linux run [39380621540](https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/39380621540) on merge commit `c803af2` succeeded for test 3.11, test 3.12, and notebooks. `publish-results` was skipped on that `main` push because the workflow refuses to commit logs onto `main`.
 
-A new local run for this branch is recorded in `docs/validation-report.md` after it finishes. Do not describe that run as Appendix C.
+Local checks on 2026-10-25 and Linux run [40239854669](https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/40239854669) on `a36d610` are in `docs/validation-report.md`. Do not describe that run as Appendix C.
 
 ## License
 

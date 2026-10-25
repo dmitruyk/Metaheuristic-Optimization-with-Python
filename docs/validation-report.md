@@ -36,7 +36,9 @@ MPLBACKEND=Agg MPLCONFIGDIR=.cache/matplotlib IPYTHONDIR=.cache/ipython JUPYTER_
 .venv/bin/python scripts/prepare_reviewed_manuscript.py
 ```
 
-LibreOffice 6.3.4.2 still cannot render a PDF on this Mac (signal 6 on 2026-10-20, before either DOCX opened). No new PDF was written on 2026-10-25. KDP visual approval stays pending. Linux CI for this branch is pending until the branch is pushed.
+LibreOffice 6.3.4.2 still cannot render a PDF on this Mac (signal 6 on 2026-10-20, before either DOCX opened). No new PDF was written on 2026-10-25. KDP visual approval stays pending.
+
+Linux CI on `a36d610` passed in run [40239854669](https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/40239854669): test 3.11, test 3.12, notebooks, and publish-results. The workflow then wrote `results/ci/summary.json` as `fc05c70`. That commit is the log of `a36d610`, not a second test. `publish-results` still skips `pull_request` events and pushes to `main`.
 
 ## Previous status (2026-10-20 UTC)
 
