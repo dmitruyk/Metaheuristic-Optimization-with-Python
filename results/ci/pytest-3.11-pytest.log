@@ -1,8 +1,8 @@
 All checks passed!
-72 files already formatted
-........................................................................ [ 54%]
-............................................................             [100%]
-132 passed in 11.64s
+74 files already formatted
+........................................................................ [ 53%]
+..............................................................           [100%]
+134 passed in 9.10s
 markdown relative links missing: 0
 docx hyperlinks: not checked; pass the editorial DOCX path to check them
 Processing ./.
@@ -15,12 +15,15 @@ Processing ./.
 Building wheels for collected packages: metaopt
   Building wheel for metaopt (pyproject.toml): started
   Building wheel for metaopt (pyproject.toml): finished with status 'done'
-  Created wheel for metaopt: filename=metaopt-0.1.0-py3-none-any.whl size=50260 sha256=51027d0ce945f2e17cd5a2aee60ceb01c1596e8477adfc33d31de891466aeeff
-  Stored in directory: /tmp/pip-ephem-wheel-cache-p7emkdti/wheels/2b/5d/a6/b255c1d77dbfe4024135df96b58f6a3b1920d82a60ace7a4ce
+  Created wheel for metaopt: filename=metaopt-0.1.0-py3-none-any.whl size=50796 sha256=0b65dae1c0871054f8d774849fc9c76564e9676e6d384ce82691b129f05683d9
+  Stored in directory: /tmp/pip-ephem-wheel-cache-93l9i8qw/wheels/2b/5d/a6/b255c1d77dbfe4024135df96b58f6a3b1920d82a60ace7a4ce
 Successfully built metaopt
+
+[notice] A new release of pip is available: 26.2.1 -> 26.2.2
+[notice] To update, run: pip install --upgrade pip
 wrote /home/runner/work/_temp/ci-out/quick_validation.json
 Quick validation only. These numbers are not Appendix C or Appendix E.
-elapsed_seconds 0.0342
+elapsed_seconds 0.0268
 Full Generator protocol nominal evaluations: 945000000. Rough wall-clock range on a 2026-10-19 laptop-class CPU: 8.8–65.6 hours. Appendix E would add another timing pass at 20 runs.
 wrote /home/runner/work/_temp/ci-out/full_experiment_cost_estimate.json
 Full protocol not started. Cost estimate only.
