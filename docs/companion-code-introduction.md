@@ -15,7 +15,7 @@ python -m pip install -e '.[dev,notebooks]'
 pytest -q
 ```
 
-The repository is <https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python>. No release tag has been published. Links use `/blob/main/` and will move when `main` moves. A QR code is not included, because a code aimed at moving `main` would send a printed reader to a later commit.
+The book is all rights reserved (`BOOK_LICENSE.md`). The companion code is not MIT-licensed (`LICENSE`, `docs/licensing-audit.md`). The repository is <https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python>. No release tag has been published. Links use `/blob/main/` and will move when `main` moves. A QR code is not included, because a code aimed at moving `main` would send a printed reader to a later commit.
 
 Chapter paths are listed in `docs/book-code-map.md`.
 

@@ -53,6 +53,6 @@ Every name in `metaopt.experiments.HANDBOOK_ALGORITHMS` has the signature `minim
 
 - Page-by-page visual equality with the 346-page DOCX.
 - Bit-for-bit replay of `raw_benchmark_results.npz`.
-- A choice between the two Problem 1a listings.
-- A choice between Table 4.1 Whitley and Appendix B Whitley.
-- An open-source license or a change in author order.
+- Problem 1a is ITAE. The settling-time listing and Practical Exercise 1 are different objectives.
+- Whitley in code is the Appendix B formula. The review copy sets Table 4.1 to location 1 and value 0.
+- An MIT grant. Author order for the revised edition is Yuriy Romasevych, Viatcheslav Loveikin, Dmytro Komarchuk. See `docs/licensing-audit.md`.

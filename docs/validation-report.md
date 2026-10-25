@@ -2,7 +2,43 @@
 
 Phase: Validation.
 
-## Current status (2026-10-20 UTC)
+## Current status (2026-10-25)
+
+This section is the latest local check for the authorship and licensing pass. The 2026-10-20 section below it stays as the previous week's evidence. Linux CI for this branch is recorded here only after the push exists. Time range: local session on 2026-10-25, America/Los_Angeles. Data source: this checkout. Execution: local computation. Not paper trading and not live execution.
+
+Previous week (2026-10-20): pytest 132 passed on Python 3.11.7 in 13.29 s and on Python 3.12.13 in 14.89 s. Merge run [39380621540](https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python/actions/runs/39380621540) on `c803af2` succeeded for tests and notebooks. `publish-results` was skipped on that `main` push because `.github/workflows/ci.yml` requires `github.event_name == 'push'` and `github.ref != 'refs/heads/main'`.
+
+MIT was not applied. See `docs/licensing-audit.md`. Appendix C and Appendix E were not run.
+
+| Metric | Previous week (2026-10-20) | This status (2026-10-25) | Delta |
+| --- | --- | --- | --- |
+| `pytest -q` on Python 3.11.7 | 132 passed, 13.29 s | 134 passed, 18.57 s | +2 tests (citation record and review-copy authors) |
+| `pytest -q` on Python 3.12.13 | 132 passed, 14.89 s | 134 passed, 21.00 s | +2 tests |
+| `ruff check` and `ruff format --check` | passed | passed on both interpreters | none |
+| Notebooks 01–10 | exit 0 | exit 0 | none |
+| Package wheel | not recorded in that section | `metaopt-0.1.0-py3-none-any.whl` built with `pip wheel --no-deps` | build succeeded |
+| Documentation links | 0 missing | 0 missing markdown links. Review DOCX: 0 missing repository paths, 8 external citation links not fetched | none |
+| Quick profile | 0.032 s, not Appendix C | 0.0424 s, `results/quick_validation_2026-10-25.json`, `matches_appendix_c` false and `matches_appendix_e` false | still not Appendix C or E |
+| MIT License | not applied | still not applied | none |
+
+Commands, from the repository root, Python 3.11.7 and 3.12.13, NumPy 2.4.6 on 3.11, platform `macOS-26.6.2-x86_64-i386-64bit`:
+
+```bash
+.venv/bin/ruff check .
+.venv/bin/ruff format --check .
+.venv/bin/pytest -q
+.cache/venv312/bin/ruff check .
+.cache/venv312/bin/pytest -q
+MPLBACKEND=Agg MPLCONFIGDIR=.cache/matplotlib IPYTHONDIR=.cache/ipython JUPYTER_CONFIG_DIR=.cache/jupyter .venv/bin/python scripts/execute_notebooks.py
+.venv/bin/python scripts/handbook_experiment.py --profile quick --output results/quick_validation_2026-10-25.json
+.venv/bin/python -m pip wheel --no-deps -w .cache/wheel .
+.venv/bin/python scripts/validate_doc_links.py
+.venv/bin/python scripts/prepare_reviewed_manuscript.py
+```
+
+LibreOffice 6.3.4.2 still cannot render a PDF on this Mac (signal 6 on 2026-10-20, before either DOCX opened). No new PDF was written on 2026-10-25. KDP visual approval stays pending. Linux CI for this branch is pending until the branch is pushed.
+
+## Previous status (2026-10-20 UTC)
 
 This section is the latest evidence. The sections below it are historical local notes from 2026-10-19 and are not restated as the current CI result.
 
