@@ -1,6 +1,6 @@
 # Methodology
 
-This repository follows the editorial manuscript *Metaheuristic Optimization with Python* by Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk. Equation images in the DOCX are not text. Appendix B is the executable source for the 54 benchmark formulas and for the experiment implementations of the optimizers. Where Appendix B and a table disagree, `docs/errata.md` records both and the code keeps Appendix B.
+This repository follows the editorial manuscript *Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples* by Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk. Equation images in the DOCX are not text. Appendix B is the executable source for the 54 benchmark formulas and for the experiment implementations of the optimizers. Where Appendix B and a table disagree, `docs/errata.md` records both and the code keeps Appendix B.
 
 ## What is minimized
 

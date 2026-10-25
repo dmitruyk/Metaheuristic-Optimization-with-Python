@@ -29,9 +29,9 @@ Rendered pages are estimates from page-break markers in `Metaheuristic_Optimizat
 - **Where.** Manuscript copyright line; repository `LICENSE`, `CITATION.cff`, and `README.md`.
 - **Before (manuscript, as reviewed).** Copyright names Yuriy Romasevych and Viatcheslav Loveikin.
 - **Current repository text.** Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk, with Komarchuk last. `LICENSE` records approval on 19 October 2026 to create the companion repository and states that no open-source license has been selected.
-- **After.** Whatever written approval names. Do not drop or reorder an author from the software files unless all credited authors agree. Do not add MIT, Apache-2.0, or GPL until that approval names one.
-- **Result change.** None in this branch.
-- **Decision.** Not made.
+- **After, 2026-10-25.** Repository metadata keeps Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk, in that order. The review-copy title page and copyright line add Dmytro Komarchuk. The line does not state copyright shares. MIT is not applied. See `docs/licensing-audit.md`.
+- **Result change.** Review-copy author lines only. Bibliography entries that cite earlier papers are left as printed.
+- **Decision.** Co-author order for the revised Python edition is the order above. The MIT grant is still absent.
 
 ## Replacements that do not change a formula
 

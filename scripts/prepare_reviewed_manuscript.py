@@ -2,7 +2,9 @@
 
 The manuscript is all rights reserved. This script writes a review copy under
 ``manuscript/`` and does not put that binary in git. It does not change
-equations that are images, authorship, or the license.
+equations that are images. On the review copy only, it adds Dmytro Komarchuk
+after Viatcheslav Loveikin on the title page and on the copyright line. That
+line does not state copyright shares. It does not apply the MIT License.
 
 Corrections, each checked against the paragraph sequence before it is applied:
 
@@ -165,6 +167,40 @@ def _replace_once(xml: str, old: str, new: str, label: str) -> str:
     if count != 1:
         raise ValueError(f"{label}: expected 1 occurrence of {old!r}, found {count}")
     return xml.replace(old, new, 1)
+
+
+COPYRIGHT_LINE = "© Yuriy Romasevych, Viatcheslav Loveikin, 2026"
+COPYRIGHT_LINE_REVISED = "© Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk, 2026"
+TITLE_PAGE_NAME = "<w:t>Viatcheslav Loveikin</w:t>"
+
+
+def apply_revised_authors(xml: str) -> tuple[str, list[str]]:
+    """Name the three agreed co-authors on the review copy.
+
+    The editorial source lists two names. This does not state equal copyright
+    shares, and it does not rewrite bibliography entries that cite earlier
+    papers by a subset of the authors.
+    """
+
+    xml = _replace_once(xml, COPYRIGHT_LINE, COPYRIGHT_LINE_REVISED, "copyright line")
+    if xml.count(TITLE_PAGE_NAME) != 1:
+        raise ValueError(f"title-page name: expected 1 occurrence, found {xml.count(TITLE_PAGE_NAME)}")
+    position = xml.find(TITLE_PAGE_NAME)
+    paragraph_end = xml.find("</w:p>", position)
+    paragraph_start = xml.rfind("<w:p ", 0, position)
+    if paragraph_start < 0 or paragraph_end < 0:
+        raise ValueError("title-page paragraph was not found")
+    paragraph_end += len("</w:p>")
+    paragraph = xml[paragraph_start:paragraph_end]
+    if paragraph.count("Viatcheslav Loveikin") != 1:
+        raise ValueError("title-page paragraph is not the Loveikin line")
+    clone = paragraph.replace("Viatcheslav Loveikin", "Dmytro Komarchuk", 1)
+    xml = xml[:paragraph_end] + clone + xml[paragraph_end:]
+    return xml, [
+        "Title page adds Dmytro Komarchuk after Viatcheslav Loveikin",
+        "Copyright line names Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk, 2026",
+        "The copyright line does not state copyright shares",
+    ]
 
 
 def apply_editorial_xml(xml: str) -> tuple[str, list[str]]:
@@ -338,6 +374,8 @@ def prepare(source: Path, destination: Path) -> list[str]:
         document_xml = archive.read("word/document.xml").decode("utf-8")
         rels_xml = archive.read("word/_rels/document.xml.rels").decode("utf-8")
         document_xml, log = apply_editorial_xml(document_xml)
+        document_xml, author_log = apply_revised_authors(document_xml)
+        log.extend(author_log)
         rels_xml = _append_relationships(rels_xml)
         payload = {name: archive.read(name) for name in archive.namelist()}
     payload["word/document.xml"] = document_xml.encode("utf-8")

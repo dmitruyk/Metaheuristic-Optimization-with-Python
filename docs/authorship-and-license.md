@@ -1,8 +1,16 @@
 # Authorship and license
 
-Phase: Validation. Date: 2026-10-20.
+Phase: Validation.
 
-No author was added, removed, or reordered. No license was selected.
+## Status on 2026-10-25
+
+The revised Python edition has three agreed co-authors, in this order: Yuriy Romasevych, Viatcheslav Loveikin, Dmytro Komarchuk. `README.md`, `CITATION.cff`, and `pyproject.toml` already used that order. The local review copy of the manuscript adds the third name on the title page and the copyright line. That line does not state copyright shares.
+
+MIT was not applied. Evidence and the no-go are in `docs/licensing-audit.md`. The book remains all rights reserved (`BOOK_LICENSE.md`).
+
+The comparison below is the 2026-10-20 record of the editorial file before that review-copy edit. It is not restated as the current author list.
+
+## Comparison recorded on 2026-10-20
 
 ## Comparison
 

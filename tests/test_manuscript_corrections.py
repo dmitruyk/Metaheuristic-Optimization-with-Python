@@ -5,7 +5,13 @@ from __future__ import annotations
 from xml.etree import ElementTree as ET
 
 import pytest
-from scripts.prepare_reviewed_manuscript import W, apply_editorial_xml, apply_table_corrections, paragraph_text
+from scripts.prepare_reviewed_manuscript import (
+    W,
+    apply_editorial_xml,
+    apply_revised_authors,
+    apply_table_corrections,
+    paragraph_text,
+)
 
 
 def _paragraph(text: str) -> ET.Element:
@@ -60,6 +66,20 @@ def test_editorial_xml_edits_preserve_the_surrounding_markup():
     assert updated.count("rIdReviewLink") == 13
     assert updated.startswith("<w:document>")
     assert len(log) > 4
+
+
+def test_revised_authors_are_added_without_stating_shares():
+    xml = (
+        '<w:p w:rsidR="1"><w:r><w:t>Viatcheslav Loveikin</w:t></w:r></w:p>'
+        "<w:t>© Yuriy Romasevych, Viatcheslav Loveikin, 2026</w:t>"
+        "<w:t>Romasevych Yu., Loveikin V., Makarets V.</w:t>"
+    )
+    updated, log = apply_revised_authors(xml)
+    assert updated.count("<w:t>Dmytro Komarchuk</w:t>") == 1
+    assert "© Yuriy Romasevych, Viatcheslav Loveikin, and Dmytro Komarchuk, 2026" in updated
+    assert "Makarets" in updated
+    assert "equal" not in " ".join(log).lower()
+    assert updated.startswith('<w:p w:rsidR="1">')
 
 
 def test_a_missing_whitley_pair_is_not_silently_skipped():

@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 title: "Metaheuristic Optimization with Python"
-message: "Please cite the handbook. This companion software has no approved license and no published DOI."
+message: "Please cite the handbook. This companion software has no open-source license and no published DOI or ISBN. Do not describe it as MIT-licensed."
 type: software
 authors:
   - family-names: Romasevych
@@ -12,7 +12,7 @@ authors:
 year: 2026
 preferred-citation:
   type: book
-  title: "Metaheuristic Optimization with Python: Algorithms, Reproducible Experiments, and Engineering Applications"
+  title: "Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples"
   authors:
     - family-names: Romasevych
       given-names: Yuriy
