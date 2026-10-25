@@ -2,7 +2,7 @@
 
 Phase: Validation. Date: 2026-10-25.
 
-*Metaheuristic Optimization with Python* remains **All Rights Reserved** unless a separate written license says otherwise.
+*Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples* remains **All Rights Reserved** unless a separate written license says otherwise.
 
 The following are covered by that reservation:
 

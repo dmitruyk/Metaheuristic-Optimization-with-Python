@@ -2,7 +2,7 @@
 
 Phase: Validation. Date: 2026-10-20.
 
-This is the short introduction for readers of *Metaheuristic Optimization with Python*. The same paragraphs are inserted into the local review copy of the manuscript by `scripts/prepare_reviewed_manuscript.py`.
+This is the short introduction for readers of *Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples*. The same paragraphs are inserted into the local review copy of the manuscript by `scripts/prepare_reviewed_manuscript.py`.
 
 ## Install
 

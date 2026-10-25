@@ -1,5 +1,7 @@
 # Release candidate notes for 0.1.0
 
+Book: *Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples.* Authors, in order: Yuriy Romasevych, Viatcheslav Loveikin, Dmytro Komarchuk. No ISBN, DOI, or publisher is recorded here.
+
 Phase: Validation. Date: 2026-10-25. Base: `main` at `c803af2`.
 
 **This is not a GitHub release.** No tag was created. Book links stay on `/blob/main/` until a tag exists.

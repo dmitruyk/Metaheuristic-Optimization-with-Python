@@ -11,7 +11,12 @@ ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOKS = ROOT / "notebooks"
 
 
+BOOK_LINE = "*Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples.*"
+
+
 def cell(source: str, kind: str = "code") -> dict:
+    if kind == "markdown" and source.lstrip().startswith("# Chapter") and BOOK_LINE not in source:
+        source = source.replace("\n\n", "\n\n" + BOOK_LINE + "\n\n", 1)
     lines = source.strip("\n").split("\n")
     payload = [line + "\n" for line in lines[:-1]]
     if lines:

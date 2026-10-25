@@ -12,7 +12,7 @@ authors:
 year: 2026
 preferred-citation:
   type: book
-  title: "Metaheuristic Optimization with Python: Algorithms, Reproducible Experiments, and Engineering Applications"
+  title: "Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples"
   authors:
     - family-names: Romasevych
       given-names: Yuriy

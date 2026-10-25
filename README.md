@@ -1,6 +1,10 @@
 # Metaheuristic Optimization with Python
 
-Companion code for the handbook *Metaheuristic Optimization with Python* by **Yuriy Romasevych**, **Viatcheslav Loveikin**, and **Dmytro Komarchuk**, in that order (revised Python edition, 2026). Naming three co-authors does not state their copyright shares. The algorithms, benchmark formulas, and engineering models follow the manuscript. This repository does not replace PSO, DE, or GWO with an unrelated package.
+**Algorithms, Engineering Applications, and Practical Examples**
+
+**Authors:** Yuriy Romasevych, Viatcheslav Loveikin, Dmytro Komarchuk
+
+Companion code for the handbook *Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples* by **Yuriy Romasevych**, **Viatcheslav Loveikin**, and **Dmytro Komarchuk**, in that order (revised Python edition, 2026). Naming three co-authors does not state their copyright shares. The algorithms, benchmark formulas, and engineering models follow the manuscript. This repository does not replace PSO, DE, or GWO with an unrelated package.
 
 The book, its illustrations, and its book-specific tables are all rights reserved. See `BOOK_LICENSE.md`. The companion software is not under the MIT License. `LICENSE` records approval to create this repository and states that no open-source license has been selected. The check is `docs/licensing-audit.md`.
 
@@ -58,7 +62,7 @@ Notebooks `01` through `10` follow that order. `docs/book-code-map.md` lists man
 
 Cite the handbook. A machine-readable record is in `CITATION.cff`. It has no DOI and no ISBN, because none is recorded here:
 
-Romasevych, Yuriy, Loveikin, Viatcheslav, and Komarchuk, Dmytro. *Metaheuristic Optimization with Python: Algorithms, Reproducible Experiments, and Engineering Applications.* 2026.
+Romasevych, Yuriy, Loveikin, Viatcheslav, and Komarchuk, Dmytro. *Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples.* 2026.
 
 Cite the software from the same file only as the companion checkout you used. Do not describe that software as MIT-licensed. The book citation and the software checkout are different works. `BOOK_LICENSE.md` is the book reservation.
 

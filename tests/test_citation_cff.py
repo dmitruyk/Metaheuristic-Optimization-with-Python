@@ -12,6 +12,9 @@ def test_citation_cff_names_the_three_co_authors_and_invents_nothing():
     assert "message: " in text
     assert "type: software" in text
     assert "type: book" in text
+    assert "Algorithms, Engineering Applications, and Practical Examples" in text.split("preferred-citation:")[1]
+    assert "Algorithms, Reproducible Experiments, and Engineering Applications" not in text
+    assert text.split("preferred-citation:")[0].count("title:") == 1
     lowered = text.lower()
     assert "doi:" not in lowered
     assert "isbn:" not in lowered
