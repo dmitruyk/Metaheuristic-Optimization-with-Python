@@ -19,7 +19,7 @@ KDP-ready is not claimed. A high-resolution PDF and a visual check of equations,
 | 7 | Notebooks 01–10 execute from a clean checkout on Linux | 🟢 the notebooks job in that run succeeded | same Actions run |
 | 8 | Book links resolve | 🟡 repository markdown links resolve. The review DOCX adds chapter links to `main`. The Downloads source still has no repository links | `python scripts/validate_doc_links.py` |
 | 9 | Every published figure and table marked verified or unverified | 🟢 recorded | `docs/book-code-map.md` and `docs/coverage-matrix.md`; figures stay unverified |
-| 10 | Dependency pins from the validation environments | 🟢 recorded as platform-specific locks, not as a cross-platform solver | `requirements/lock-py311.txt`, `requirements/lock-py312.txt` |
+| 10 | Dependency pins from the validation environments | 🟢 recorded as platform-specific locks, not as a cross-platform solver | `requirements/lock-py312.txt` |
 | 11 | Tagged release, then replace `/blob/main/` links | 🔴 not started | do this only after items 1–7 are accepted |
 | 12 | Page-by-page visual QC of the print PDF | 🔴 not done | LibreOffice 6.3.4.2 aborts with signal 6 on this Mac before loading the editorial DOCX or the review copy. No PDF was written |
 

@@ -18,8 +18,8 @@ assemble = _MODULE.assemble
 
 def test_assemble_prefixes_artifact_names_and_marks_the_study(tmp_path: Path):
     artifacts = tmp_path / "artifacts"
-    (artifacts / "pytest-3.11").mkdir(parents=True)
-    (artifacts / "pytest-3.11" / "pytest.log").write_text("60 passed\n", encoding="utf-8")
+    (artifacts / "pytest-3.12").mkdir(parents=True)
+    (artifacts / "pytest-3.12" / "pytest.log").write_text("60 passed\n", encoding="utf-8")
     (artifacts / "notebooks").mkdir()
     (artifacts / "notebooks" / "notebooks.log").write_text("executing 01\n", encoding="utf-8")
     destination = tmp_path / "results" / "ci"
@@ -36,9 +36,9 @@ def test_assemble_prefixes_artifact_names_and_marks_the_study(tmp_path: Path):
             "notebooks_result": "success",
         },
     )
-    assert (destination / "pytest-3.11-pytest.log").read_text(encoding="utf-8") == "60 passed\n"
+    assert (destination / "pytest-3.12-pytest.log").read_text(encoding="utf-8") == "60 passed\n"
     assert summary["matches_appendix_c"] is False
     assert summary["matches_appendix_e"] is False
     saved = json.loads((destination / "summary.json").read_text(encoding="utf-8"))
-    assert saved["files"] == ["notebooks-notebooks.log", "pytest-3.11-pytest.log"]
+    assert saved["files"] == ["notebooks-notebooks.log", "pytest-3.12-pytest.log"]
     assert saved["test_result"] == "success"
