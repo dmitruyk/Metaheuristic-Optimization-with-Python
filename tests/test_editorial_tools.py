@@ -113,16 +113,23 @@ def test_apply_tracked_edits_round_trip(tmp_path: Path) -> None:
         {"idx": 1, "op": "set_style", "style": "1"},
         {"idx": 1, "op": "insert_after", "new": "This chapter introduces DE.", "style": "a8"},
         {"idx": 8, "op": "delete_table"},
+        {"idx": 1, "op": "join_next", "append": ". "},
+        {"idx": 0, "op": "insert_toc_after", "heading": "Contents"},
     ]
     out = tmp_path / "out" / "document.xml"
     rev = apply_mod.apply(doc, edits, "Editorial (Claude)", out)
     assert [r["idx"] for r in rev.rejected] == [3]
     assert "allow_code" in rev.rejected[0]["reason"]
-    assert len(rev.applied) == 8
+    assert len(rev.applied) == 10
 
     root = ET.parse(out).getroot()
     body = root.find(f"{W}body")
     paragraphs = list(body.iter(f"{W}p"))
+    # TOC heading + field inserted right after paragraph 0; drop them for the index checks below.
+    assert _visible(paragraphs[1]) == "Contents"
+    assert paragraphs[2].find(f".//{W}instrText").text.strip().startswith("TOC")
+    assert paragraphs[2].find(f"{W}pPr/{W}rPr/{W}ins") is not None
+    del paragraphs[1:3]
     # Accepted view
     assert _visible(paragraphs[0]) == "Install Python 3.12 and clone the companion repository."
     assert _visible(paragraphs[3]) == "The position matrix, Position, is generated; it holds one row per particle."
@@ -149,6 +156,9 @@ def test_apply_tracked_edits_round_trip(tmp_path: Path) -> None:
     heading = paragraphs[1]
     assert heading.find(f"{W}pPr/{W}pStyle").get(f"{W}val") == "1"
     assert heading.find(f"{W}pPr/{W}pPrChange") is not None
+    # join_next: appended text inserted, paragraph mark deleted.
+    assert _visible(heading) == "Chapter 2. "
+    assert heading.find(f"{W}pPr/{W}rPr/{W}del") is not None
     # Table deletion: row marked deleted, cell text in delText.
     tables = body.findall(f"{W}tbl")
     assert tables[1].find(f"{W}tr/{W}trPr/{W}del") is not None

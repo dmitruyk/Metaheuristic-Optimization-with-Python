@@ -8,6 +8,8 @@ Input is JSON Lines. Each record names a paragraph by the ``idx`` that
     {"idx": 312, "op": "insert_after", "new": "…", "style": "a8"}
     {"idx": 312, "op": "set_style", "style": "1"}
     {"idx": 13149, "op": "delete_table"}
+    {"idx": 156, "op": "join_next", "append": ". "}
+    {"idx": 52, "op": "insert_toc_after", "heading": "Contents"}
 
 ``op`` defaults to ``replace``. A replace is diffed at word level against the
 current text and written as ``w:del``/``w:ins`` runs that keep the formatting
@@ -23,7 +25,11 @@ adds a new paragraph (style copied from the target unless ``style`` is
 given) whose runs and mark are marked inserted. ``set_style`` changes the
 paragraph style and records the previous paragraph properties in a
 ``w:pPrChange``. ``delete_table`` marks every row of the table that contains
-the paragraph deleted, together with every run in it.
+the paragraph deleted, together with every run in it. ``join_next`` marks
+the paragraph mark deleted (so the paragraph merges into the next one when
+accepted) after inserting ``append`` at its end. ``insert_toc_after`` adds a
+heading paragraph and a ``TOC \\o "1-3" \\h \\z \\u`` field that Word fills in on
+update, both marked inserted.
 
 Every revision carries ``w:author`` (default ``Editorial (Claude)``), a UTC
 ``w:date`` and a ``w:id`` unique in the document. The script never touches
@@ -365,6 +371,61 @@ def insert_paragraph_after(element: ET.Element, text: str, style: str | None, re
     return 1
 
 
+def join_next(element: ET.Element, append: str, rev: Revisions, parents: dict) -> int:
+    count = 0
+    if append:
+        runs = paragraph_runs(element)
+        template = runs[-1] if runs else None
+        wrapper = ET.Element(f"{W}ins", rev.attrs())
+        wrapper.append(_make_run(template, append, deleted=False))
+        element.append(wrapper)
+        count += 1
+    rpr = _ppr_rpr(element)
+    rpr.insert(0, ET.Element(f"{W}del", rev.attrs()))
+    return count + 1
+
+
+def _field_run(kind: str) -> ET.Element:
+    run = ET.Element(f"{W}r")
+    ET.SubElement(run, f"{W}fldChar", {f"{W}fldCharType": kind})
+    return run
+
+
+def insert_toc_after(element: ET.Element, heading: str, rev: Revisions, parents: dict) -> int:
+    parent = parents[element]
+    at = list(parent).index(element) + 1
+    count = 0
+    if heading:
+        head = ET.Element(f"{W}p")
+        ppr = ET.SubElement(head, f"{W}pPr")
+        ET.SubElement(ppr, f"{W}pStyle", {f"{W}val": "ad"})  # Title style: not collected by the TOC
+        rpr = ET.SubElement(ppr, f"{W}rPr")
+        rpr.insert(0, ET.Element(f"{W}del", rev.attrs()))  # placeholder, replaced below
+        rpr.remove(rpr[0])
+        rpr.insert(0, ET.Element(f"{W}ins", rev.attrs()))
+        wrapper = ET.SubElement(head, f"{W}ins", rev.attrs())
+        wrapper.append(_make_run(None, heading, deleted=False))
+        parent.insert(at, head)
+        at += 1
+        count += 1
+    toc = ET.Element(f"{W}p")
+    ppr = ET.SubElement(toc, f"{W}pPr")
+    rpr = ET.SubElement(ppr, f"{W}rPr")
+    rpr.insert(0, ET.Element(f"{W}ins", rev.attrs()))
+    wrapper = ET.SubElement(toc, f"{W}ins", rev.attrs())
+    wrapper.append(_field_run("begin"))
+    instr = ET.Element(f"{W}r")
+    it = ET.SubElement(instr, f"{W}instrText")
+    it.set(XML_SPACE, "preserve")
+    it.text = ' TOC \\o "1-3" \\h \\z \\u '
+    wrapper.append(instr)
+    wrapper.append(_field_run("separate"))
+    wrapper.append(_make_run(None, "Table of contents: right-click here and choose Update Field (or press F9).", deleted=False))
+    wrapper.append(_field_run("end"))
+    parent.insert(at, toc)
+    return count + 1
+
+
 def set_style(element: ET.Element, style: str, rev: Revisions) -> int:
     ppr = _ppr(element)
     old_copy = copy.deepcopy(ppr)
@@ -446,6 +507,10 @@ def apply(document_xml: Path, edits: list[dict], author: str, out: Path) -> Revi
                 n = set_style(element, record["style"], rev)
             elif op == "delete_table":
                 n = delete_table(element, rev, parents)
+            elif op == "join_next":
+                n = join_next(element, record.get("append", ""), rev, parents)
+            elif op == "insert_toc_after":
+                n = insert_toc_after(element, record.get("heading", "Contents"), rev, parents)
             else:
                 raise ValueError(f"unknown op {op!r}")
         except ValueError as exc:
