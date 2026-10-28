@@ -19,3 +19,4 @@ manuscript/*.pdf
 manuscript/.libreoffice/
 .DS_Store
 .cache/
+manuscript/render/
