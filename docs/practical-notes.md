@@ -4,7 +4,7 @@ Phase: Validation. Date: 2026-10-20.
 
 These notes sit beside the manuscript. They do not add algorithms. The handbook's depth is unchanged.
 
-1. **Environment.** Use Python 3.11 or 3.12 and NumPy 2, in a virtual environment. Do not let a listing run `pip install`. See `docs/companion-code-introduction.md`.
+1. **Environment.** Use Python 3.12 and NumPy 2, in a virtual environment. Do not let a listing run `pip install`. See `docs/companion-code-introduction.md`.
 2. **Parameters.** PSO uses `w=0.72`, `c1=c2=1.19` unless the variant says otherwise. DE uses `CR=0.5`, `F=0.6`. SADE in this book adapts one shared `F` and `CR`; it is not a strategy-pool SaDE. GWO decreases `a` from 2 toward 0. The coefficients are in `docs/methodology.md`.
 3. **Convergence curves.** `result.history` is the best value after each generation, including the initial sample. A log plot that falls and then flattens has stopped improving the best-so-far value. It has not proved that the point is the global minimum.
 4. **Fair comparisons.** The Chapter 5 tables use the same iteration count. GWOEPD spends extra evaluations, and ME-D-PSO can stop early. `metaopt.experiments.compare` gives every algorithm the same `max_evaluations`. Say which budget you used.

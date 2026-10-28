@@ -246,7 +246,7 @@ The 30 objective values and `nfev` counts in the two reduced JSON files were equ
 
 Grouped medians (identical in both files): Spherical PSO 1.6932, DE/rand 5.58251, GWO 1.7852; Rastrigin PSO 28.2014, DE/rand 38.2869, GWO 23.0007. Every run used `nfev` 64. These are not printed handbook cells.
 
-Dependency snapshots: `requirements/lock-py311.txt` and `requirements/lock-py312.txt`. They record this Mac. They are not the install used by `.github/workflows/ci.yml`.
+Dependency snapshots: `requirements/lock-py312.txt` (the `lock-py311.txt` snapshot named in the 2026-10-25 version of this report was removed on 2026-10-27 when the project standardised on Python 3.12). It records this Mac. It is not the install used by `.github/workflows/ci.yml`.
 
 ### Verdict for this review
 

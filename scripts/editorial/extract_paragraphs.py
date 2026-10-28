@@ -71,9 +71,8 @@ def main(argv: list[str] | None = None) -> int:
         code = sum(1 for p in items if p.style in CODE_STYLES)
         table = sum(1 for p in items if p.in_table)
         objects = sum(1 for p in items if p.has_object)
-        print(
-            f"  {name:22s} paragraphs={len(items):5d} code={code:4d} table_cells={table:5d} objects={objects:4d} prose_words={words[name]:6d}"
-        )
+        line = f"  {name:22s} paragraphs={len(items):5d} code={code:4d} table_cells={table:5d}"
+        print(f"{line} objects={objects:4d} prose_words={words[name]:6d}")
     return 0
 
 

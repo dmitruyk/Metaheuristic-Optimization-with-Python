@@ -8,15 +8,15 @@ Phase: Validation. Date: 2026-10-25. Base: `main` at `c803af2`.
 
 ## Install
 
-Python 3.11 or 3.12. NumPy at least 2.0.
+Python 3.12. NumPy at least 2.0.
 
 ```bash
-python3.11 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[dev,notebooks]'
 ```
 
-There is no pinned cross-platform lock used by GitHub Actions. Local snapshots are `requirements/lock-py311.txt` and `requirements/lock-py312.txt`. Declared dependencies are in `pyproject.toml`: `numpy>=2.0`, `scipy>=1.11`, `matplotlib>=3.8`, plus the `dev` and `notebooks` extras.
+There is no pinned cross-platform lock used by GitHub Actions. The local snapshot is `requirements/lock-py312.txt`. Declared dependencies are in `pyproject.toml`: `numpy>=2.0`, `scipy>=1.11`, `matplotlib>=3.8`, plus the `dev` and `notebooks` extras.
 
 ## What this candidate contains
 
