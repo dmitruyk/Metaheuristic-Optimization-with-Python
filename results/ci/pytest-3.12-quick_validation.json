@@ -26,7 +26,7 @@
       5.12
     ]
   },
-  "elapsed_seconds": 0.023698071000012533,
+  "elapsed_seconds": 0.03353192700001273,
   "summary": [
     {
       "algorithm": "PSO",
@@ -38,7 +38,7 @@
       "mean": 3.004136579240871,
       "sample_std": 1.8539444601511177,
       "median_nfev": 64.0,
-      "total_seconds": 0.0015953630000069552
+      "total_seconds": 0.0023745469999880697
     },
     {
       "algorithm": "DE/rand",
@@ -50,7 +50,7 @@
       "mean": 8.861743840985731,
       "sample_std": 7.243237097611972,
       "median_nfev": 64.0,
-      "total_seconds": 0.0037634049999866193
+      "total_seconds": 0.0066210249999869575
     },
     {
       "algorithm": "GWO",
@@ -62,7 +62,7 @@
       "mean": 2.579875666031224,
       "sample_std": 1.1238443675226955,
       "median_nfev": 64.0,
-      "total_seconds": 0.0015452689999904123
+      "total_seconds": 0.0024324949999936507
     },
     {
       "algorithm": "PSO",
@@ -74,7 +74,7 @@
       "mean": 25.759023828763308,
       "sample_std": 3.5984479523534922,
       "median_nfev": 64.0,
-      "total_seconds": 0.0018828489999975773
+      "total_seconds": 0.002629534999982752
     },
     {
       "algorithm": "DE/rand",
@@ -86,7 +86,7 @@
       "mean": 41.42313888906008,
       "sample_std": 0.9928262349034067,
       "median_nfev": 64.0,
-      "total_seconds": 0.004328692000001411
+      "total_seconds": 0.007107428000011851
     },
     {
       "algorithm": "GWO",
@@ -98,7 +98,7 @@
       "mean": 26.296224057486945,
       "sample_std": 12.743698225842456,
       "median_nfev": 64.0,
-      "total_seconds": 0.0021053180000052407
+      "total_seconds": 0.002962228999990657
     }
   ],
   "ranks": [
@@ -112,7 +112,7 @@
       "mean": 2.579875666031224,
       "sample_std": 1.1238443675226955,
       "median_nfev": 64.0,
-      "total_seconds": 0.0015452689999904123,
+      "total_seconds": 0.0024324949999936507,
       "median_rank": 1
     },
     {
@@ -125,7 +125,7 @@
       "mean": 3.004136579240871,
       "sample_std": 1.8539444601511177,
       "median_nfev": 64.0,
-      "total_seconds": 0.0015953630000069552,
+      "total_seconds": 0.0023745469999880697,
       "median_rank": 2
     },
     {
@@ -138,7 +138,7 @@
       "mean": 8.861743840985731,
       "sample_std": 7.243237097611972,
       "median_nfev": 64.0,
-      "total_seconds": 0.0037634049999866193,
+      "total_seconds": 0.0066210249999869575,
       "median_rank": 3
     },
     {
@@ -151,7 +151,7 @@
       "mean": 25.759023828763308,
       "sample_std": 3.5984479523534922,
       "median_nfev": 64.0,
-      "total_seconds": 0.0018828489999975773,
+      "total_seconds": 0.002629534999982752,
       "median_rank": 1
     },
     {
@@ -164,7 +164,7 @@
       "mean": 26.296224057486945,
       "sample_std": 12.743698225842456,
       "median_nfev": 64.0,
-      "total_seconds": 0.0021053180000052407,
+      "total_seconds": 0.002962228999990657,
       "median_rank": 2
     },
     {
@@ -177,7 +177,7 @@
       "mean": 41.42313888906008,
       "sample_std": 0.9928262349034067,
       "median_nfev": 64.0,
-      "total_seconds": 0.004328692000001411,
+      "total_seconds": 0.007107428000011851,
       "median_rank": 3
     }
   ],
@@ -192,7 +192,7 @@
       "seed": 12345,
       "fun": 1.693199879524783,
       "nfev": 64,
-      "seconds": 0.00090849500000445,
+      "seconds": 0.0013529189999985647,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -208,7 +208,7 @@
       "seed": 12345,
       "fun": 3.740001771522339,
       "nfev": 64,
-      "seconds": 0.0019382409999906258,
+      "seconds": 0.003894928999983449,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -224,7 +224,7 @@
       "seed": 12345,
       "fun": 1.7851976927576194,
       "nfev": 64,
-      "seconds": 0.0008175809999926287,
+      "seconds": 0.0012878070000112984,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -240,7 +240,7 @@
       "seed": 12345,
       "fun": 28.30351077761931,
       "nfev": 64,
-      "seconds": 0.0009656800000072963,
+      "seconds": 0.0015864769999893724,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -256,7 +256,7 @@
       "seed": 12345,
       "fun": 40.72110472581997,
       "nfev": 64,
-      "seconds": 0.002228431000006026,
+      "seconds": 0.0041453290000106335,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -272,7 +272,7 @@
       "seed": 12345,
       "fun": 17.285068624598768,
       "nfev": 64,
-      "seconds": 0.001061121999995862,
+      "seconds": 0.001819804999996677,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -288,7 +288,7 @@
       "seed": 12346,
       "fun": 4.31507327895696,
       "nfev": 64,
-      "seconds": 0.0006868680000025051,
+      "seconds": 0.001021627999989505,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -304,7 +304,7 @@
       "seed": 12346,
       "fun": 13.983485910449124,
       "nfev": 64,
-      "seconds": 0.0018251639999959934,
+      "seconds": 0.0027260960000035084,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -320,7 +320,7 @@
       "seed": 12346,
       "fun": 3.3745536393048283,
       "nfev": 64,
-      "seconds": 0.0007276879999977837,
+      "seconds": 0.0011446879999823523,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -336,7 +336,7 @@
       "seed": 12346,
       "fun": 23.214536879907307,
       "nfev": 64,
-      "seconds": 0.000917168999990281,
+      "seconds": 0.0010430579999933798,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -352,7 +352,7 @@
       "seed": 12346,
       "fun": 42.125173052300184,
       "nfev": 64,
-      "seconds": 0.0021002609999953847,
+      "seconds": 0.002962099000001217,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -368,7 +368,7 @@
       "seed": 12346,
       "fun": 35.30737949037512,
       "nfev": 64,
-      "seconds": 0.0010441960000093786,
+      "seconds": 0.00114242399999398,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -380,7 +380,7 @@
     "python": "3.12.15",
     "numpy": "2.5.4",
     "metaopt": "0.1.0",
-    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "platform": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
     "machine": "x86_64",
     "processor": "x86_64",
     "cpu_count": 4
