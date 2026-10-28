@@ -68,9 +68,60 @@ class Paragraph:
     code_like: bool = False
 
 
-def register_namespaces() -> None:
+_ROOT_TAG = re.compile(r"<w:document\b[^>]*>", re.S)
+_XMLNS = re.compile(r'xmlns:([A-Za-z0-9_]+)="([^"]+)"')
+
+
+def register_namespaces(document_xml: Path | None = None) -> str | None:
+    """Register prefixes so ElementTree writes them back as Word wrote them.
+
+    Returns the original ``<w:document …>`` start tag when a file is given, so
+    that :func:`write_document` can restore every namespace declaration
+    (ElementTree drops the ones it considers unused, but ``mc:Ignorable``
+    still names them and Word then refuses to open the file).
+    """
     for prefix, uri in NAMESPACES.items():
         ET.register_namespace(prefix, uri)
+    if document_xml is None:
+        return None
+    head = document_xml.read_text(encoding="utf-8")[:20000]
+    match = _ROOT_TAG.search(head)
+    if match is None:
+        return None
+    for prefix, uri in _XMLNS.findall(match.group(0)):
+        try:
+            ET.register_namespace(prefix, uri)
+        except ValueError:
+            pass  # reserved prefix such as xml
+    return match.group(0)
+
+
+def write_document(tree: ET.ElementTree, out: Path, root_tag: str | None) -> None:
+    """Serialise ``tree`` with every namespace declaration Word or ElementTree needs.
+
+    ElementTree hoists locally declared prefixes (``a:`` for DrawingML) to the
+    root and drops declarations it considers unused; Word needs both sets, so
+    the written root tag is the union of the original declarations and the
+    ones ElementTree produced, with the original non-namespace attributes
+    (``mc:Ignorable``) kept.
+    """
+    tree.write(out, xml_declaration=True, encoding="UTF-8")
+    text = out.read_text(encoding="utf-8")
+    written = _ROOT_TAG.search(text)
+    if root_tag is None or written is None:
+        return
+    declared: dict[str, str] = dict(_XMLNS.findall(root_tag))
+    for prefix, uri in _XMLNS.findall(written.group(0)):
+        declared.setdefault(prefix, uri)
+    other = re.sub(r'\s*xmlns:[A-Za-z0-9_]+="[^"]*"', "", root_tag[len("<w:document") : -1]).strip()
+    parts = ["<w:document"] + [f'xmlns:{k}="{v}"' for k, v in declared.items()]
+    if other:
+        parts.append(other)
+    merged = " ".join(parts) + ">"
+    text = text[: written.start()] + merged + text[written.end() :]
+    if not text.startswith("<?xml"):
+        text = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' + text
+    out.write_text(text, encoding="utf-8")
 
 
 def run_text(run: ET.Element) -> str:
@@ -119,7 +170,7 @@ def _ancestry(root: ET.Element) -> dict[ET.Element, ET.Element]:
 
 
 def collect(document_xml: Path) -> tuple[ET.ElementTree, list[Paragraph], list[ET.Element]]:
-    register_namespaces()
+    register_namespaces(document_xml)
     tree = ET.parse(document_xml)
     root = tree.getroot()
     parents = _ancestry(root)
