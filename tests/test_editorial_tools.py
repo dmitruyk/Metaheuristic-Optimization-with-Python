@@ -181,3 +181,37 @@ def test_apply_rejects_mismatched_old_text(tmp_path: Path) -> None:
     assert rev.applied == [] and "old text" in rev.rejected[0]["reason"]
     report = json.loads(json.dumps({"applied": rev.applied, "rejected": rev.rejected}))
     assert report["rejected"][0]["idx"] == 2
+
+
+def test_accept_changes_matches_visible_text(tmp_path: Path) -> None:
+    doc = tmp_path / "document.xml"
+    doc.write_text(DOCUMENT, encoding="utf-8")
+    apply_mod = _load("apply_tracked_edits")
+    accept_mod = _load("accept_changes")
+    edits = [
+        {"idx": 0, "new": "Install Python 3.12 and clone the companion repository."},
+        {"idx": 1, "op": "join_next", "append": ". "},
+        {"idx": 1, "op": "set_style", "style": "1"},
+        {"idx": 2, "new": "The position matrix is generated."},
+        {"idx": 8, "op": "delete_table"},
+        {"idx": 7, "op": "insert_after", "new": "New closing paragraph."},
+    ]
+    out = tmp_path / "out.xml"
+    apply_mod.apply(doc, edits, "E", out)
+    root = ET.parse(out).getroot()
+    expected = [_visible(p) for p in root.find(f"{W}body").iter(f"{W}p")]
+    counts = accept_mod.accept(root)
+    body = root.find(f"{W}body")
+    texts = ["".join(t.text or "" for t in p.iter(f"{W}t")) for p in body.iter(f"{W}p")]
+    assert "Chapter 2. The matrix Position is generated, which contains the particles." not in texts
+    assert "Chapter 2. The position matrix is generated." in texts
+    assert "Install Python 3.12 and clone the companion repository." in texts
+    assert "New closing paragraph." in texts
+    assert len(body.findall(f"{W}tbl")) == 1  # the stale TOC table is gone
+    assert counts["deleted_rows"] == 1 and counts["merged_paragraphs"] == 1
+    assert root.find(f".//{W}ins") is None and root.find(f".//{W}del") is None
+    assert root.find(f".//{W}pPrChange") is None
+    # Every non-merged paragraph keeps its accepted text.
+    for text in expected:
+        if text and text != "Chapter 2. ":
+            assert text in texts or any(text in t for t in texts)

@@ -59,7 +59,8 @@ from editorial_docx import Paragraph, W, collect, paragraph_runs, paragraph_text
 
 XML_SPACE = "{http://www.w3.org/XML/1998/namespace}space"
 _TOKEN = re.compile(r"\s+|\w+|[^\w\s]")
-_SKIP_RUN_CHILDREN = {f"{W}t", f"{W}tab", f"{W}br", f"{W}cr", f"{W}rPr"}
+# lastRenderedPageBreak is a layout cache Word regenerates; it is dropped when a run is rebuilt.
+_SKIP_RUN_CHILDREN = {f"{W}t", f"{W}tab", f"{W}br", f"{W}cr", f"{W}rPr", f"{W}lastRenderedPageBreak"}
 
 # Children of w:pPr in schema order; w:pPrChange must come last.
 _PPR_ORDER = [
