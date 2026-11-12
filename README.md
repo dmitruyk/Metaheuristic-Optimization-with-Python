@@ -12,10 +12,10 @@ Source: <https://github.com/dmitruyk/Metaheuristic-Optimization-with-Python>. No
 
 ## Five-minute setup
 
-Python 3.11 or 3.12 is required. NumPy must be at least 2.0 because the PID listing calls `numpy.trapezoid`.
+Python 3.12 is required. NumPy must be at least 2.0 because the PID listing calls `numpy.trapezoid`.
 
 ```bash
-python3.11 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -U pip
 python -m pip install -e '.[dev,notebooks]'

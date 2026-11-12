@@ -7,7 +7,7 @@ name = "metaopt"
 version = "0.1.0"
 description = "Companion code for Metaheuristic Optimization with Python: Algorithms, Engineering Applications, and Practical Examples."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 authors = [
   {name = "Yuriy Romasevych"},
   {name = "Viatcheslav Loveikin"},
@@ -49,7 +49,7 @@ where = ["src"]
 
 [tool.ruff]
 line-length = 140
-target-version = "py311"
+target-version = "py312"
 src = ["src", "tests", "examples", "scripts"]
 extend-exclude = ["docs", "manuscript_extract", ".cache", ".venv"]
 

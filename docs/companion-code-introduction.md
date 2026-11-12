@@ -6,10 +6,10 @@ This is the short introduction for readers of *Metaheuristic Optimization with P
 
 ## Install
 
-Python 3.11 or 3.12 is required. NumPy must be at least 2.0.
+Python 3.12 is required. NumPy must be at least 2.0.
 
 ```bash
-python3.11 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -e '.[dev,notebooks]'
 pytest -q

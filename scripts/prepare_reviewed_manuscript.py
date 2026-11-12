@@ -266,7 +266,7 @@ def apply_editorial_xml(xml: str) -> tuple[str, list[str]]:
         raise ValueError("companion heading was not found once")
     paragraphs = []
     intro = (
-        "Companion code. Python 3.11 or 3.12. Install with python -m pip install -e '.[dev,notebooks]'. "
+        "Companion code. Python 3.12. Install with python -m pip install -e '.[dev,notebooks]'. "
         "No release tag exists, so the links follow main and will move when main moves.",
         "The optimizers use numpy.random.Generator. Printed Appendix C and Appendix E traces used np.random.seed "
         "and are historical. The quick validation study is not those appendices.",
@@ -326,7 +326,7 @@ def insert_companion_block(
     anchor = body_paragraphs[matches[0]]
     intro = [
         (
-            "Companion code. Python 3.11 or 3.12. Install with "
+            "Companion code. Python 3.12. Install with "
             "python -m pip install -e '.[dev,notebooks]'. "
             "No release tag exists, so the links follow main and will move when main moves."
         ),
