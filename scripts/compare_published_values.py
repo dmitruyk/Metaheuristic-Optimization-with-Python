@@ -71,9 +71,9 @@ def worked_rows() -> list[dict]:
         ),
         _row(
             "Cart-pole",
-            "feasible vector",
-            cart_pole.objective(cart_pole.WORKED_FEASIBLE),
-            cart_pole.WORKED_FEASIBLE_VALUE,
+            "right-column trial",
+            cart_pole.objective(cart_pole.WORKED_RIGHT),
+            cart_pole.WORKED_RIGHT_VALUE,
         ),
         _row(
             "Cart-pole",

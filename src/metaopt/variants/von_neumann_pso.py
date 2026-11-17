@@ -1,8 +1,8 @@
 """von Neumann PSO, Section 1.5.2 and Appendix B.
 
 Particles sit on a square torus. The social attractor is the best personal
-best among the up, down, left, and right neighbors. The particle itself is
-not in that neighborhood, matching the manuscript. ``population_size`` must
+best among the up, down, left, and right neighbors, as in Appendix B.
+The Chapter 1 listing also includes the particle itself. ``population_size`` must
 be a perfect square (the experiments use 25). Boundary policy:
 zero-velocity-and-clip.
 """

@@ -1,15 +1,7 @@
-"""Cart-pole swing-up, Chapter 6 Problem 5.
+"""Chapter 6 swing-up with angle zero upright and the pendulum initially hanging.
 
-The manuscript ternary
-
-``penalty_terminal = 0.0 if reached else W_TERMINAL * np.linalg.norm(S[-1])``
-
-is valid Python when it stays on one line. A layout wrap that puts ``else``
-on the next line without parentheses is a syntax error. This module keeps
-the expression in parentheses so a formatter cannot split it illegally.
-
-``reached`` is true if *any* state, including the start, lies inside the
-tolerance box. The start is ``(pi, 0, 0, 0)``, which is outside that box.
+The unscaled four-state ANN supplies force in newtons. The terminal test
+uses the state at 5 s; control effort is the integral of squared force.
 """
 
 from __future__ import annotations
@@ -25,7 +17,7 @@ W_POSITION = 1e4
 W_TERMINAL = 1e10
 
 WORKED_STEP = (0.1, -0.3, 1.0, -0.2, 4.0)
-WORKED_STEP_STATE = np.array([0.0925, -1.04018082, 0.995, 0.14734152])
+WORKED_STEP_STATE = np.array([0.0925, -1.16006073, 0.995, 0.25679659])
 WORKED_ANN = np.array(
     [
         -1.29,
@@ -101,8 +93,8 @@ WORKED_INFEASIBLE = np.array(
         0.47,
     ]
 )
-WORKED_INFEASIBLE_VALUE = 1224151813560.341
-WORKED_FEASIBLE = np.array(
+WORKED_INFEASIBLE_VALUE = 1346474284516.195
+WORKED_RIGHT = np.array(
     [
         1.439,
         0.402,
@@ -137,15 +129,18 @@ WORKED_FEASIBLE = np.array(
         -0.776,
     ]
 )
-WORKED_FEASIBLE_VALUE = 4.350040156962044
+WORKED_RIGHT_VALUE = 55270046796.02071
+# Historical public names for the same right-column trial.
+WORKED_FEASIBLE = WORKED_RIGHT
+WORKED_FEASIBLE_VALUE = WORKED_RIGHT_VALUE
 
 
 def step(phi: float, omega: float, x: float, v: float, force: float, dt: float = 0.025) -> np.ndarray:
     pole_mass, cart_mass, length, gravity = 0.3, 0.2, 0.5, 9.81
     sine, cosine = np.sin(phi), np.cos(phi)
-    denominator = pole_mass * length + cart_mass * length * sine * sine
-    phi_acc = (-(pole_mass + cart_mass) * gravity * sine - cart_mass * length * omega**2 * sine * cosine - force * cosine) / denominator
-    x_acc = (cart_mass * sine * (length * omega**2 + gravity * cosine) + force) / (pole_mass + cart_mass * sine * sine)
+    denominator = cart_mass + pole_mass * sine**2
+    x_acc = (force + pole_mass * sine * (length * omega**2 - gravity * cosine)) / denominator
+    phi_acc = (gravity * sine - x_acc * cosine) / length
     return np.array(
         [phi + omega * dt, omega + phi_acc * dt, x + v * dt, v + x_acc * dt],
         dtype=float,
@@ -183,11 +178,11 @@ def simulate(theta) -> dict:
         forces.append(force)
     trajectory = np.array(states)
     force_array = np.array(forces)
-    reached = bool(np.any(np.all(np.abs(trajectory) < TOL, axis=1)))
+    reached = bool(np.all(np.abs(trajectory[-1]) <= TOL))
     terminal_penalty = 0.0 if reached else W_TERMINAL * float(np.linalg.norm(trajectory[-1]))
     x_max = float(np.abs(trajectory[:, 2]).max())
     position_penalty = W_POSITION * max(0.0, x_max - X_MAX)
-    control_cost = float(np.sqrt(np.sum(force_array**2) * DT))
+    control_cost = float(np.sum(force_array**2) * DT)
     return {
         "fun": float(terminal_penalty + position_penalty + control_cost),
         "feasible": reached and position_penalty == 0.0,
