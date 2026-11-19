@@ -16,7 +16,7 @@ authors = [
 keywords = ["optimization", "pso", "differential-evolution", "grey-wolf-optimizer"]
 dependencies = [
   "numpy>=2.0",
-  "scipy>=1.11",
+  "scipy>=1.15",
   "matplotlib>=3.8",
 ]
 

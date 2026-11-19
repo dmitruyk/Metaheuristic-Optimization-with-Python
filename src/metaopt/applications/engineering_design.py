@@ -12,15 +12,16 @@ import numpy as np
 
 
 def beam_components(x: np.ndarray) -> dict:
-    """Listing with variables ``b, h, tw, tf``."""
+    """I-beam variant with area limit 300 and bending-stress limit 6."""
 
     b, h, tw, tf = np.asarray(x, dtype=float).reshape(-1)
-    g1 = 2 * b * tw + tw * (h - 2 * tf) - 300
-    denominator = tw * (h - 2 * tf) ** 3 + 2 * b * tw * (4 * tf**2 + 3 * h * (h - 2 * tf))
-    g2 = (18 * 10**4 * h) / denominator + (15 * 10**3 * b) / ((h - 2 * tf) * tw**3 + 2 * tw * b**3) - 6
+    web_height = h - 2 * tf
+    g1 = 2 * b * tf + tw * web_height - 300
+    ix = tw * web_height**3 / 12 + b * tf**3 / 6 + 2 * b * tf * ((h - tf) / 2) ** 2
+    iy = (web_height * tw**3 + 2 * tf * b**3) / 12
+    g2 = 180000 * h / (12 * ix) + 15000 * b / (12 * iy) - 6
     penalty = (max(0.0, g1) + max(0.0, g2)) * 10**8
-    inertia = tw * (h - 2 * tf) ** 3 / 12 + b * tf**3 / 6 + 2 * b * tf * ((h - tf) / 2) ** 2
-    criterion = 5000 / inertia
+    criterion = 5000 / ix
     return {
         "fun": float(criterion + penalty),
         "criterion": float(criterion),
@@ -81,10 +82,15 @@ def concrete_beam_objective(x: np.ndarray) -> float:
 
 
 def gripper_components(x: np.ndarray) -> dict:
+    """Use the π/4 inclination limit and check closure at every sampled displacement."""
     a, b, c, e, f, length, delta = np.asarray(x, dtype=float).reshape(-1)
     z_min, z_max = 0, 25
     y_min, y_max = 70, 150
     z_values = np.arange(z_min, z_max + 1)
+    if a == 0 or b == 0 or (e == 0 and length in z_values):
+        # Link angles and the displacement ratio are undefined. Return a
+        # finite objective to let optimizers reject these in-domain endpoints.
+        return {"fun": 1e30, "criterion": np.nan, "penalty": 1e30, "feasible": False}
 
     def g_length(z):
         return np.sqrt((length - z) ** 2 + e**2)
@@ -124,8 +130,8 @@ def gripper_components(x: np.ndarray) -> dict:
     g7 = np.min(length - z_values)
     g8 = np.max(np.abs(cos_alpha))
     g9 = np.max(np.abs(cos_beta))
-    h1 = np.min(h1_values)
-    h2 = np.min(h2_values)
+    h1 = np.max(h1_values)
+    h2 = np.max(h2_values)
     penalties = [
         max(0.0, -g1),
         max(0.0, -g2),

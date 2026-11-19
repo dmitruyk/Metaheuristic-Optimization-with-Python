@@ -9,9 +9,9 @@
     {
       "area": "Problem 1a ITAE",
       "point": "(0.1, 1, 9)",
-      "observed": 19655252.199124757,
+      "observed": 19655252.19912473,
       "published": 19655252.199124742,
-      "absolute_difference": 1.4901161193847656e-08,
+      "absolute_difference": 1.1175870895385742e-08,
       "relative_tolerance": 1e-06,
       "absolute_tolerance": 1e-08,
       "status": "matched"
@@ -19,9 +19,9 @@
     {
       "area": "Problem 1a ITAE",
       "point": "(0.276, 0.765, 2.221)",
-      "observed": 18.79604614140255,
+      "observed": 18.796046141402517,
       "published": 18.796046141402556,
-      "absolute_difference": 7.105427357601002e-15,
+      "absolute_difference": 3.907985046680551e-14,
       "relative_tolerance": 1e-06,
       "absolute_tolerance": 1e-08,
       "status": "matched"
@@ -98,9 +98,9 @@
     },
     {
       "area": "Cart-pole",
-      "point": "feasible vector",
-      "observed": 4.350040156962044,
-      "published": 4.350040156962044,
+      "point": "right-column trial",
+      "observed": 55270046796.02071,
+      "published": 55270046796.02071,
       "absolute_difference": 0.0,
       "relative_tolerance": 1e-06,
       "absolute_tolerance": 1e-08,
@@ -109,9 +109,9 @@
     {
       "area": "Cart-pole",
       "point": "infeasible vector",
-      "observed": 1224151813560.3403,
-      "published": 1224151813560.341,
-      "absolute_difference": 0.000732421875,
+      "observed": 1346474284516.195,
+      "published": 1346474284516.195,
+      "absolute_difference": 0.0,
       "relative_tolerance": 1e-06,
       "absolute_tolerance": 1e-08,
       "status": "matched"

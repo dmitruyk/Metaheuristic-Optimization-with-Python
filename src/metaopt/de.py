@@ -194,6 +194,10 @@ def scipy_minimize(
     SciPy samples, mutates, and handles bounds with its own implementation.
     A matching ``max_evaluations`` does not make the two histories comparable
     number-by-number; compare final values at an equal evaluation budget.
+    The cap includes initialization and stops at whole population boundaries;
+    unused remainder is not spent. Budgets smaller than the actual initial
+    population raise ValueError before calling the objective. The returned
+    population size accounts for SciPy's minimum of five and fixed bounds.
     """
 
     from scipy.optimize import differential_evolution
@@ -201,18 +205,22 @@ def scipy_minimize(
     if rng is not None and seed is not None:
         raise ValueError("pass either rng or seed, not both")
     box = require_bounds(bounds)
+    if population_size < 1:
+        raise ValueError("population_size must be >= 1")
+    if iterations is not None and iterations < 1:
+        raise ValueError("iterations must be >= 1")
     if max_evaluations is None:
         if iterations is None:
             raise ValueError("pass iterations or max_evaluations")
         max_evaluations = population_size * iterations
-    # SciPy 1.17 takes maxiter, not maxfun. Its population is popsize * dimension,
-    # so the requested population is rounded down to a multiple of the dimension
-    # (and at least one multiple). maxiter is chosen so the initial sample plus
-    # later generations stay near the requested evaluation budget. The realized
-    # nfev can still differ by a generation.
+    # Keep the existing multiplier, but account for SciPy's minimum population
+    # and equal bounds. maxiter excludes the initial population evaluation.
     multiplier = max(1, population_size // box.dimension)
-    actual_population = multiplier * box.dimension
-    maxiter = max(1, max_evaluations // actual_population)
+    free_dimensions = int(np.count_nonzero(box.lower != box.upper))
+    actual_population = max(5, multiplier * max(1, free_dimensions))
+    if max_evaluations < actual_population:
+        raise ValueError(f"the evaluation budget cannot pay for the initial population ({actual_population} evaluations)")
+    maxiter = int(max_evaluations // actual_population) - 1
     kwargs = {
         "bounds": list(zip(box.lower.tolist(), box.upper.tolist(), strict=True)),
         "popsize": multiplier,
@@ -236,6 +244,6 @@ def scipy_minimize(
         success=bool(result.success) and np.isfinite(result.fun),
         message="scipy.optimize.differential_evolution (not the handbook DE): " + str(result.message),
         algorithm="scipy.optimize.differential_evolution",
-        population_size=population_size,
+        population_size=int(result.population.shape[0]),
         max_evaluations=int(max_evaluations),
     )

@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from metaopt.constraints import equality_band, hinge, weighted_sum
+from metaopt.constraints import equality_band, feasible_from_penalty, hinge, weighted_sum
 from metaopt.variants.bb_pso import minimize as bb
 from metaopt.variants.ia_pso import minimize as ia
 from metaopt.variants.ldw_pso import minimize as ldw
@@ -25,6 +25,38 @@ def test_penalty_helpers():
     assert equality_band(0.01, 0.02) == 0
     assert equality_band(0.05, 0.02) == pytest.approx(0.05)
     assert weighted_sum([-1, 2, 0], 10) == 20
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), -float("inf")])
+def test_hinge_rejects_nonfinite_residuals(value):
+    with pytest.raises(ValueError, match="finite"):
+        hinge(value)
+
+
+@pytest.mark.parametrize("violation", [0.001, 1e-30])
+def test_small_penalty_cannot_certify_feasibility(violation):
+    total = weighted_sum([violation], 1000)
+    with pytest.raises(ValueError, match="cannot certify"):
+        feasible_from_penalty(total, 1000, 0)
+    assert not feasible_from_penalty(total, 1000, 0, violations=[0, violation])
+
+
+def test_feasibility_checks_every_component_with_explicit_tolerance():
+    assert feasible_from_penalty(2000, 1000, 0, violations=[0, 0])
+    assert feasible_from_penalty(1, 1000, 0, violations=[0.001], tolerance=0.001)
+    assert not feasible_from_penalty(1, 1000, 0, violations=[0, 0.002], tolerance=0.001)
+
+
+@pytest.mark.parametrize("violations", [[float("nan")], [float("inf")], [-1], [[0]]])
+def test_feasibility_rejects_invalid_components(violations):
+    with pytest.raises(ValueError, match="violations"):
+        feasible_from_penalty(0, 1000, 0, violations=violations)
+
+
+@pytest.mark.parametrize("tolerance", [-1, float("nan"), float("inf")])
+def test_feasibility_rejects_invalid_tolerance(tolerance):
+    with pytest.raises(ValueError, match="tolerance"):
+        feasible_from_penalty(0, 1000, 0, violations=[0], tolerance=tolerance)
 
 
 @pytest.mark.parametrize(
