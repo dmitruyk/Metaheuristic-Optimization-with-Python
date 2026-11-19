@@ -1,8 +1,9 @@
 All checks passed!
-74 files already formatted
-........................................................................ [ 53%]
-..............................................................           [100%]
-134 passed in 6.81s
+75 files already formatted
+........................................................................ [ 41%]
+........................................................................ [ 82%]
+...............................                                          [100%]
+175 passed in 10.01s
 markdown relative links missing: 0
 docx hyperlinks: not checked; pass the editorial DOCX path to check them
 Processing ./.
@@ -15,15 +16,12 @@ Processing ./.
 Building wheels for collected packages: metaopt
   Building wheel for metaopt (pyproject.toml): started
   Building wheel for metaopt (pyproject.toml): finished with status 'done'
-  Created wheel for metaopt: filename=metaopt-0.1.0-py3-none-any.whl size=50802 sha256=126a72fe504cbdf474274a41e0925a4a622f04437ba4fecf5ac3cb76060a94e3
-  Stored in directory: /tmp/pip-ephem-wheel-cache-zm7duhbs/wheels/f1/54/25/85fb1e729c6d5bb4af93608ed629531603fc0c1cd9cda6d426
+  Created wheel for metaopt: filename=metaopt-0.1.0-py3-none-any.whl size=51242 sha256=5e6a38491bf1e0aed56abcce6f17ff28249bbde0d8486c84f6a5f4c716b4f9e9
+  Stored in directory: /tmp/pip-ephem-wheel-cache-5gnn4ssl/wheels/f1/54/25/85fb1e729c6d5bb4af93608ed629531603fc0c1cd9cda6d426
 Successfully built metaopt
-
-[notice] A new release of pip is available: 26.2.1 -> 26.2.2
-[notice] To update, run: pip install --upgrade pip
 wrote /home/runner/work/_temp/ci-out/quick_validation.json
 Quick validation only. These numbers are not Appendix C or Appendix E.
-elapsed_seconds 0.0168
+elapsed_seconds 0.0313
 Full Generator protocol nominal evaluations: 945000000. Rough wall-clock range on a 2026-10-19 laptop-class CPU: 8.8–65.6 hours. Appendix E would add another timing pass at 20 runs.
 wrote /home/runner/work/_temp/ci-out/full_experiment_cost_estimate.json
 Full protocol not started. Cost estimate only.

@@ -26,7 +26,7 @@
       5.12
     ]
   },
-  "elapsed_seconds": 0.016813616000007414,
+  "elapsed_seconds": 0.0312525980000089,
   "summary": [
     {
       "algorithm": "PSO",
@@ -38,7 +38,7 @@
       "mean": 3.004136579240871,
       "sample_std": 1.8539444601511177,
       "median_nfev": 64.0,
-      "total_seconds": 0.0011063940000184402
+      "total_seconds": 0.002370992999999544
     },
     {
       "algorithm": "DE/rand",
@@ -50,7 +50,7 @@
       "mean": 8.861743840985731,
       "sample_std": 7.243237097611972,
       "median_nfev": 64.0,
-      "total_seconds": 0.0025350750000114886
+      "total_seconds": 0.006411903999975266
     },
     {
       "algorithm": "GWO",
@@ -62,7 +62,7 @@
       "mean": 2.579875666031224,
       "sample_std": 1.1238443675226955,
       "median_nfev": 64.0,
-      "total_seconds": 0.00110000499999785
+      "total_seconds": 0.0020576900000435216
     },
     {
       "algorithm": "PSO",
@@ -74,7 +74,7 @@
       "mean": 25.759023828763308,
       "sample_std": 3.5984479523534922,
       "median_nfev": 64.0,
-      "total_seconds": 0.0013112729999988915
+      "total_seconds": 0.0025311110000245662
     },
     {
       "algorithm": "DE/rand",
@@ -86,7 +86,7 @@
       "mean": 41.42313888906008,
       "sample_std": 0.9928262349034067,
       "median_nfev": 64.0,
-      "total_seconds": 0.0028899809999956005
+      "total_seconds": 0.006548748999989584
     },
     {
       "algorithm": "GWO",
@@ -98,7 +98,7 @@
       "mean": 26.296224057486945,
       "sample_std": 12.743698225842456,
       "median_nfev": 64.0,
-      "total_seconds": 0.0015000799999995706
+      "total_seconds": 0.0027917059999822413
     }
   ],
   "ranks": [
@@ -112,7 +112,7 @@
       "mean": 2.579875666031224,
       "sample_std": 1.1238443675226955,
       "median_nfev": 64.0,
-      "total_seconds": 0.00110000499999785,
+      "total_seconds": 0.0020576900000435216,
       "median_rank": 1
     },
     {
@@ -125,7 +125,7 @@
       "mean": 3.004136579240871,
       "sample_std": 1.8539444601511177,
       "median_nfev": 64.0,
-      "total_seconds": 0.0011063940000184402,
+      "total_seconds": 0.002370992999999544,
       "median_rank": 2
     },
     {
@@ -138,7 +138,7 @@
       "mean": 8.861743840985731,
       "sample_std": 7.243237097611972,
       "median_nfev": 64.0,
-      "total_seconds": 0.0025350750000114886,
+      "total_seconds": 0.006411903999975266,
       "median_rank": 3
     },
     {
@@ -151,7 +151,7 @@
       "mean": 25.759023828763308,
       "sample_std": 3.5984479523534922,
       "median_nfev": 64.0,
-      "total_seconds": 0.0013112729999988915,
+      "total_seconds": 0.0025311110000245662,
       "median_rank": 1
     },
     {
@@ -164,7 +164,7 @@
       "mean": 26.296224057486945,
       "sample_std": 12.743698225842456,
       "median_nfev": 64.0,
-      "total_seconds": 0.0015000799999995706,
+      "total_seconds": 0.0027917059999822413,
       "median_rank": 2
     },
     {
@@ -177,7 +177,7 @@
       "mean": 41.42313888906008,
       "sample_std": 0.9928262349034067,
       "median_nfev": 64.0,
-      "total_seconds": 0.0028899809999956005,
+      "total_seconds": 0.006548748999989584,
       "median_rank": 3
     }
   ],
@@ -192,7 +192,7 @@
       "seed": 12345,
       "fun": 1.693199879524783,
       "nfev": 64,
-      "seconds": 0.0006856270000099585,
+      "seconds": 0.0013644089999900189,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -208,7 +208,7 @@
       "seed": 12345,
       "fun": 3.740001771522339,
       "nfev": 64,
-      "seconds": 0.0013267770000027213,
+      "seconds": 0.00348296199999254,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -224,7 +224,7 @@
       "seed": 12345,
       "fun": 1.7851976927576194,
       "nfev": 64,
-      "seconds": 0.0005855759999917609,
+      "seconds": 0.001280563000022994,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -240,7 +240,7 @@
       "seed": 12345,
       "fun": 28.30351077761931,
       "nfev": 64,
-      "seconds": 0.000669982999994545,
+      "seconds": 0.0015267120000146406,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -256,7 +256,7 @@
       "seed": 12345,
       "fun": 40.72110472581997,
       "nfev": 64,
-      "seconds": 0.0014592670000013186,
+      "seconds": 0.003816983999996637,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -272,7 +272,7 @@
       "seed": 12345,
       "fun": 17.285068624598768,
       "nfev": 64,
-      "seconds": 0.0007553129999990915,
+      "seconds": 0.0017011859999911394,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -288,7 +288,7 @@
       "seed": 12346,
       "fun": 4.31507327895696,
       "nfev": 64,
-      "seconds": 0.0004207670000084818,
+      "seconds": 0.001006584000009525,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -304,7 +304,7 @@
       "seed": 12346,
       "fun": 13.983485910449124,
       "nfev": 64,
-      "seconds": 0.0012082980000087673,
+      "seconds": 0.002928941999982726,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -320,7 +320,7 @@
       "seed": 12346,
       "fun": 3.3745536393048283,
       "nfev": 64,
-      "seconds": 0.0005144290000060892,
+      "seconds": 0.0007771270000205277,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -336,7 +336,7 @@
       "seed": 12346,
       "fun": 23.214536879907307,
       "nfev": 64,
-      "seconds": 0.0006412900000043464,
+      "seconds": 0.0010043990000099257,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -352,7 +352,7 @@
       "seed": 12346,
       "fun": 42.125173052300184,
       "nfev": 64,
-      "seconds": 0.001430713999994282,
+      "seconds": 0.002731764999992947,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -368,7 +368,7 @@
       "seed": 12346,
       "fun": 35.30737949037512,
       "nfev": 64,
-      "seconds": 0.0007447670000004791,
+      "seconds": 0.001090519999991102,
       "dimension": 5,
       "population_size": 8,
       "max_evaluations": 64,
@@ -377,12 +377,12 @@
   ],
   "statement": "Quick validation only. These numbers are not Appendix C or Appendix E.",
   "environment": {
-    "python": "3.12.15",
-    "numpy": "2.5.4",
+    "python": "3.12.16",
+    "numpy": "2.5.5",
     "metaopt": "0.1.0",
-    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "platform": "Linux-7.0.0-1020-azure-x86_64-with-glibc2.43",
     "machine": "x86_64",
-    "processor": "x86_64",
+    "processor": "",
     "cpu_count": 4
   },
   "matches_appendix_c": false,
