@@ -451,7 +451,7 @@ if not (0.0 < clear["penalty"] < 1e-6):
 
 The terminal penalty stays a parenthesized conditional so a typesetter cannot split it into an illegal `else` line. No package is installed from this notebook.
 
-**Expected.** The feasible cart-pole vector prints `True`. The infeasible vector prints `False`. Mountain-car 4a at the feasible vector returns 90.
+**Expected.** Both cart-pole trials print `False` under the corrected swing-up model. Mountain-car 4a at the feasible vector returns 90.
 
 **Interpretation.** These are direct evaluations of printed inputs. They are not traced copies of the chapter figures.
 """,
@@ -464,7 +464,7 @@ from metaopt.applications import cart_pole, mountain_car
 print(mountain_car.step(*mountain_car.WORKED_STEP))
 print(mountain_car.objective_4a(mountain_car.WORKED_4A_FEASIBLE))
 print(cart_pole.step(*cart_pole.WORKED_STEP))
-print(cart_pole.simulate(cart_pole.WORKED_FEASIBLE)["feasible"])
+print(cart_pole.simulate(cart_pole.WORKED_RIGHT)["feasible"])
 print(cart_pole.simulate(cart_pole.WORKED_INFEASIBLE)["feasible"])
 """,
             ),

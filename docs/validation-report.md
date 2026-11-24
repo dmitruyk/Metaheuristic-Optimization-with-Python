@@ -2,6 +2,18 @@
 
 Phase: Validation.
 
+## FINAL_synced scientific review (2026-11-17)
+
+This local Windows review supersedes the historical status sections below for the corrected working checkout. The archived FINAL_synced manuscript remains unchanged, with SHA-256 `44fd3892950d017c245f34839d54a9fc18ad79dc8f940d628bb773e9a1b73e54`. No new GitHub Actions result or public release is claimed.
+
+The approved specification uses hanging-to-upright cart-pole motion with unscaled controller inputs, the mechanically derived Furuta model, MountainCar output gain 5, the corrected I-beam geometry with stress limit 6, and gripper angular limit pi/4. Historical results are qualified separately from recalculated examples. The original cart-pole controller vectors are infeasible under the corrected task; their failure must not be presented as successful swing-up.
+
+Validation used an isolated Python 3.12 environment. All **175 tests passed**. Ruff checks and formatting checks passed for all 75 Python files. All **10 notebooks passed in fresh kernels**, with unchanged notebook source files during execution. The current manuscript's 75 ordinary one-column Python listings parse; its installation cell intentionally contains Jupyter magic.
+
+Mathematical review accounted for all **229 original Equation.3 occurrences**. Independent scalar implementations agreed with the 54 printed benchmark objectives in 324 off-optimum comparisons. Another 144 expected-value checks passed; the remaining sampled cases were explicitly distinguished from optimum certificates. The corrected cart-pole and Furuta models passed six mass-matrix residual checks below 1e-13, and the crane implementation agreed with its derived trajectory at 903 parameter/time combinations.
+
+These checks do not reproduce the full historical Appendix C and E studies, prove arbitrary-dimensional global minima for every benchmark, or certify continuous-time constraints between simulation samples. Manuscript page proof and equation rendering are recorded in the surrounding audit workspace. The original equation payloads are archived, and corrected equations are editable in the working manuscript.
+
 ## Current status (2026-10-25)
 
 This section is the latest local check for the authorship and licensing pass. The 2026-10-20 section below it stays as the previous week's evidence. Linux CI for this branch is recorded here only after the push exists. Time range: local session on 2026-10-25, America/Los_Angeles. Data source: this checkout. Execution: local computation. Not paper trading and not live execution.
@@ -138,8 +150,8 @@ Seeds do not apply: these are direct evaluations of the printed points.
 | Crane coefficients (-6, 9, 20, 5, 5, 60, 0) | 707599.2688799157 | 707599.2688799157 | 0; infeasible |
 | Crane coefficients (-5, 6, 10, -2, 5, 20, -4) | 0.4209773021079328 | 0.4209773021079328 | 0; speed excess about 6.4e-8 m/s |
 | Mountain-car feasible 4a / 4b | 90 and 145 | 90 and 145 | 0 |
-| Cart-pole feasible vector | 4.350040156962044 | matches within relative 1e-8 | feasible |
-| Cart-pole infeasible vector | 1224151813560.341 | matches within relative 1e-8 | infeasible |
+| Cart-pole right-column trial, corrected swing-up | 55270046796.02071 | matches within relative 1e-8 | infeasible |
+| Cart-pole left-column trial, corrected swing-up | 1346474284516.195 | matches within relative 1e-8 | infeasible |
 
 Reference minima at Table 4.1 locations are in `results/reference_minima.csv` (regenerate with `scripts/reproduce_tables.py`). Largest gap in that file is Styblinski–Tang: observed `-156.66466` at `x_i = -2.903534` in 4 variables, against `-39.16599 * 4 = -156.66396`. The table's rounded `-39.166 D` is `-156.664`. The code was not changed. Schwefel 2.26 at `420.968746359982015` differs from `-418.9828872724338` by `6e-14`.
 

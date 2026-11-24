@@ -88,12 +88,15 @@ def test_mountain_car_and_cart_pole_worked_values():
     stepped_pole = cart_pole.step(*cart_pole.WORKED_STEP)
     assert stepped_pole == pytest.approx(cart_pole.WORKED_STEP_STATE, abs=5e-8)
     assert cart_pole.network(cart_pole.WORKED_ANN) == pytest.approx(cart_pole.WORKED_ANN_OUTPUT, rel=1e-10)
-    bad = cart_pole.simulate(cart_pole.WORKED_INFEASIBLE)
-    good = cart_pole.simulate(cart_pole.WORKED_FEASIBLE)
-    assert bad["feasible"] is False
-    assert good["feasible"] is True
-    assert bad["fun"] == pytest.approx(cart_pole.WORKED_INFEASIBLE_VALUE, rel=1e-8)
-    assert good["fun"] == pytest.approx(cart_pole.WORKED_FEASIBLE_VALUE, rel=1e-8)
+    left = cart_pole.simulate(cart_pole.WORKED_INFEASIBLE)
+    right = cart_pole.simulate(cart_pole.WORKED_RIGHT)
+    assert left["feasible"] is False
+    assert right["feasible"] is False
+    assert left["fun"] == pytest.approx(cart_pole.WORKED_INFEASIBLE_VALUE, rel=1e-8)
+    assert right["fun"] == pytest.approx(cart_pole.WORKED_RIGHT_VALUE, rel=1e-8)
+    assert right["control_cost"] == pytest.approx(np.sum(right["force_n"] ** 2) * cart_pole.DT)
+    assert cart_pole.step(0.01, 0.0, 0.0, 0.0, 0.0)[1] > 0
+    assert cart_pole.step(np.pi + 0.01, 0.0, 0.0, 0.0, 0.0)[1] < 0
 
 
 @pytest.mark.parametrize("script", EXAMPLES)

@@ -8,10 +8,10 @@ and stops early when the relative change of the best value is at most
 ``acceptable_rate`` and the value actually changed. The next epoch restarts
 the swarm and inserts the incumbent best into one particle.
 
-The manuscript indexes ``CostFunctionValues[-2]`` even when a restarted epoch
-has only one recorded value, which raises ``IndexError``. This implementation
-waits until two history values exist. That is the only intentional change
-inside an epoch.
+The Appendix B benchmark starts with an empty history and no incumbent.
+It records the initial best and carries that history through each restart.
+With an incumbent and an empty history, the first update provides only
+one recorded value. The restart test needs two distinct recorded values.
 
 Chapter 1.4.5 illustrates ``acceptable_rate=0.01``. The Chapter 5 experiment
 uses ``5e-3``. The default here is the experiment value.

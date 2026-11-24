@@ -179,7 +179,7 @@ def rollout(theta, *, goal: str, horizon: int = 200) -> dict:
         positions.append(x)
         velocities.append(v)
         actions.append(action)
-        if goal == "4a" and x > 0.5:
+        if goal == "4a" and x >= 0.5:
             reached = True
             break
         if goal == "4b" and abs(x - 0.5) <= 0.002 and abs(v) <= 0.002:
